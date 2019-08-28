@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment  
+metadata:  
+  name: #{the_app}#-#{environment}#-#{slot}#
+  namespace: #{environment}#
+spec:  
+  replicas: 5
+  selector:
+    matchLabels:
+      app: #{the_app}#-#{environment}#-#{slot}#
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 10%
+      maxSurge: 50%
+  template:
+    metadata:  
+      labels:  
+        app: #{the_app}#-#{environment}#-#{slot}#
+    spec:  
+      containers:  
+      - name: #{the_app}#-#{environment}#-#{slot}#
+        image: 'crwaprd1docker1.azurecr.io/#{image}#:#{tag}#'
+        ports:   
+        - containerPort: 80
+        - containerPort: 443
+        readinessProbe:
+          httpGet:
+             path: /#{warm_up_path}#
+             port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+        resources:
+          limits:
+            cpu: 1
+            memory: 1024M
+          requests:
+            cpu: .001
+            memory: 100M
+--- 
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: #{the_app}#-#{environment}#-#{slot}#
+  namespace: #{environment}#
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: #{the_app}#-#{environment}#-#{slot}#
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: AverageValue
+        averageValue: 50
+  - type: Pods
+    pods:
+      metric:
+        name: packets-per-second
+      target:
+        type: AverageValue
+        averageValue: 1k
+  # - type: Object
+  #   object:
+  #     metric:
+  #       name: requests-per-second
+  #     # describedObject:
+  #     #   apiVersion: networking.k8s.io/v1beta1
+  #     #   kind: Ingress
+  #     #   name: main-route
+  #     target:
+  #       kind: Value
+  #       value: 10k
+#status:
+#  observedGeneration: 1
+#  lastScaleTime: <some-time>
+#  currentReplicas: 1
+#  desiredReplicas: 1
+#  currentMetrics:
+#  - type: Resource
+#    resource:
+#      name: cpu
+#    current:
+#      averageUtilization: 0
+#      averageValue: 0
+#  - type: Object
+#    object:
+#      metric:
+#        name: requests-per-second
+#      describedObject:
+#        apiVersion: networking.k8s.io/v1beta1
+#        kind: Ingress
+#        name: main-route
+#      current:
+#        value: 10k
+
