@@ -4,6 +4,7 @@ Param(
   [string]$buildId
   [string]$warm_up_path
   [string]$dockerPath
+  [string]$theAppName
 )
 
 
@@ -39,11 +40,20 @@ Write-Host  "##vso[task.setvariable variable=envTag;isOutput=true;]$envTag"
 
 
 
+$deployUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/deployment.yaml'
+$serviceUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/service.yaml'
 
 
+$deploy='PipelineScripts/k8s/deployment-v1.yaml'
+$service='PipelineScripts/k8s/service-v1.yaml'
 
-$deploy='PipelineScripts/k8s/deployment.yaml'
-$service='PipelineScripts/k8s/service.yaml'
+
+Invoke-WebRequest $deployUri  -OutFile $deploy
+Invoke-WebRequest $serviceUri  -OutFile $service
+
+
+$deploy='PipelineScripts/k8s/deployment-v1.yaml'
+$service='PipelineScripts/k8s/service-v1.yaml'
 
 " #### Copy yaml files"
 Copy-Item $deploy -Destination 'PipelineScripts/k8s/step1.yaml'
