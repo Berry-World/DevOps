@@ -121,7 +121,6 @@ for ($i=1; $i -le 8; $i++)
         '#{public-slot}#'  = $publicPodsSlots[$i]
         '#{image}#'        = $image
         '#{tag}#'          = $id + '-' + $envTag
-        '#{tag}#'          = $id + '-' + $envTag
         '#{warm_up_path}#' = $warm_up_path
     }
 
