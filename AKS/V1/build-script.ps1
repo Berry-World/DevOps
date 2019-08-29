@@ -132,7 +132,8 @@ for ($i=1; $i -le 8; $i++)
         $i
         "keyName  = " + $key.Name 
         "keyValue = " + $key.Value
-        $BlueGreenDeploymentSlots[$i]
+        "deployment slot : " + $slots[$i]
+        "public service point to: " + $publicPodsSlots[$i]
         "  "
 
         $oldValue = $key.Name
