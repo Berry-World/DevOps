@@ -84,8 +84,8 @@ Copy-Item $deploy -Destination 'PipelineScripts/k8s/step8.yaml'
 
 "###Changing the image tag & service name in the yaml file###  " + $envTag 
 
-
-$BlueGreenDeploymentSlots = @{
+#BlueGreenDeployment
+$slots = @{
     1='green'
     2='green'
     3='green' #(public=>green)
@@ -96,7 +96,7 @@ $BlueGreenDeploymentSlots = @{
     8='green'
 }
 
-$BlueGreenServiceSlots = @{
+$publicPodsSlots = @{
     1='green'
     2='green'
     3='public'
@@ -117,8 +117,8 @@ for ($i=1; $i -le 8; $i++)
     $hashTable = @{
         '#{the_app}#'      = $app
         '#{environment}#'  = $envTag.ToLower() 
-        '#{slot}#'         = $BlueGreenDeploymentSlots[$i]
-        '#{public-slot}#'  = $BlueGreenDeploymentSlots[$i]
+        '#{slot}#'         = $slots[$i]
+        '#{public-slot}#'  = $publicPodsSlots[$i]
         '#{image}#'        = $image
         '#{tag}#'          = $id + '-' + $envTag
         '#{tag}#'          = $id + '-' + $envTag
