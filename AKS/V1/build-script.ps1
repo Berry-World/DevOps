@@ -1,10 +1,16 @@
 Param(
-  [string]$sourceBranch
-  [string]$repo  #$(Build.Repository.Name)
-  [string]$buildId
-  [string]$warm_up_path
-  [string]$dockerPath
-  [string]$theAppName
+  [Parameter(Mandatory=$true)]
+  [string]$sourceBranch, #$(Build.SourceBranch)
+  [Parameter(Mandatory=$true)]
+  [string]$repo,  #$(Build.Repository.Name)
+  [Parameter(Mandatory=$true)]
+  [string]$buildId,   #$(Build.BuildId)
+  [Parameter(Mandatory=$false)]
+  [string]$warm_up_path = '' ,
+  [Parameter(Mandatory=$true)]
+  [string]$dockerPath,
+  [Parameter(Mandatory=$true)]
+  [string]$theAppName,
 )
 
 
