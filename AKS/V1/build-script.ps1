@@ -115,14 +115,14 @@ $BlueGreenServiceSlots = @{
 for ($i=1; $i -le 8; $i++)
 {
     $hashTable = @{
-        '#{the_app}#'         = $app
-        '#{environment}#'     = $envTag.ToLower() 
-        '#{service-slot}#'    = $BlueGreenDeploymentSlots[$i]
-        '#{deployment-slot}#' = $BlueGreenDeploymentSlots[$i]
-        '#{image}#'           = $image
-        '#{tag}#'             = $id + '-' + $envTag
-        '#{tag}#'             = $id + '-' + $envTag
-        '#{warm_up_path}#'    = $warm_up_path
+        '#{the_app}#'      = $app
+        '#{environment}#'  = $envTag.ToLower() 
+        '#{slot}#'         = $BlueGreenDeploymentSlots[$i]
+        '#{public-slot}#'  = $BlueGreenDeploymentSlots[$i]
+        '#{image}#'        = $image
+        '#{tag}#'          = $id + '-' + $envTag
+        '#{tag}#'          = $id + '-' + $envTag
+        '#{warm_up_path}#' = $warm_up_path
     }
 
 
