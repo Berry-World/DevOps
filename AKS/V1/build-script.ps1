@@ -12,7 +12,7 @@ Param(
   [Parameter(Mandatory=$true)]
   [string]$theAppName,
   [Parameter(Mandatory=$false)]
-  [string]$replica = 2,
+  [string]$replica = 2
 )
 
 
