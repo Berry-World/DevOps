@@ -4,7 +4,7 @@ metadata:
   name: #{the_app}#-#{environment}#-#{slot}#
   namespace: #{environment}#
 spec: 
-  type: ClusterIP 
+  type: LoadBalancer  #ClusterIP 
   ports: 
   - port: 80
     targetPort: 80
