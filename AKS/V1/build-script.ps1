@@ -1,22 +1,22 @@
 Param(
   [Parameter(Mandatory=$true)]
-  [string]$sourceBranch, #$(Build.SourceBranch)
+  [string]$branch, #$(Build.SourceBranch)
   [Parameter(Mandatory=$true)]
   [string]$repo,  #$(Build.Repository.Name)
   [Parameter(Mandatory=$true)]
-  [string]$buildId,   #$(Build.BuildId)
+  [string]$id,   #$(Build.BuildId)
   [Parameter(Mandatory=$false)]
   [string]$warm_up_path = '' ,
   [Parameter(Mandatory=$true)]
   [string]$dockerPath,
   [Parameter(Mandatory=$true)]
-  [string]$theAppName,
+  [string]$app,
   [Parameter(Mandatory=$false)]
   [string]$replica = 2
 )
 
 
-$branchName= $sourceBranch.Substring(11)
+$branchName= $branch.Substring(11)
 
 $aspnetEnvName= "Local"
 $envTag= "local"
@@ -97,11 +97,11 @@ $BlueGreenDeploymentSlots = @{
 for ($i=1; $i -le 8; $i++)
 {
     $hashTable = @{
-        '#{the_app}#'            = $theAppName
+        '#{the_app}#'            = $app
         '#{environment}#'    = $envTag.ToLower() 
         '#{slot}#'                   = $BlueGreenDeploymentSlots[$i]
         '#{image}#'               = $image
-        '#{tag}#'                    = $buildId + '-' + $envTag
+        '#{tag}#'                    = $id + '-' + $envTag
         '#{warm_up_path}#'  = $warm_up_path
     }
 
@@ -125,8 +125,6 @@ for ($i=1; $i -le 8; $i++)
 
 
 "###changing the environment variable in docker file### " + $aspnetEnvName 
-#$fullPathYaml = 'src/BerryWorld.OData.CDS/Dockerfile'
-
 
 $oldValue = 'ENV ASPNETCORE_ENVIRONMENT=Local'
 $newValue = 'ENV ASPNETCORE_ENVIRONMENT=' +  $aspnetEnvName
