@@ -88,6 +88,17 @@ Copy-Item $deploy -Destination 'PipelineScripts/k8s/step8.yaml'
 $BlueGreenDeploymentSlots = @{
     1='green'
     2='green'
+    3='green' #(public=>green)
+    4='blue'
+    5='blue'
+    6='blue' #(public=>green)
+    7='green'
+    8='green'
+}
+
+$BlueGreenServiceSlots = @{
+    1='green'
+    2='green'
     3='public'
     4='blue'
     5='blue'
@@ -104,12 +115,14 @@ $BlueGreenDeploymentSlots = @{
 for ($i=1; $i -le 8; $i++)
 {
     $hashTable = @{
-        '#{the_app}#'            = $app
-        '#{environment}#'    = $envTag.ToLower() 
-        '#{slot}#'                   = $BlueGreenDeploymentSlots[$i]
-        '#{image}#'               = $image
-        '#{tag}#'                    = $id + '-' + $envTag
-        '#{warm_up_path}#'  = $warm_up_path
+        '#{the_app}#'         = $app
+        '#{environment}#'     = $envTag.ToLower() 
+        '#{service-slot}#'    = $BlueGreenDeploymentSlots[$i]
+        '#{deployment-slot}#' = $BlueGreenDeploymentSlots[$i]
+        '#{image}#'           = $image
+        '#{tag}#'             = $id + '-' + $envTag
+        '#{tag}#'             = $id + '-' + $envTag
+        '#{warm_up_path}#'    = $warm_up_path
     }
 
 
