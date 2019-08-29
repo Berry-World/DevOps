@@ -85,7 +85,7 @@ Copy-Item $deploy -Destination 'PipelineScripts/k8s/step8.yaml'
 "###Changing the image tag & service name in the yaml file###  " + $envTag 
 
 #BlueGreenDeployment
-$slots = @{
+$publicPodsSlots = @{
     1='green'
     2='green'
     3='green' #(public=>green)
@@ -96,7 +96,7 @@ $slots = @{
     8='green'
 }
 
-$publicPodsSlots = @{
+$slots = @{
     1='green'
     2='green'
     3='public'
