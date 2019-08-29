@@ -90,7 +90,7 @@ $BlueGreenDeploymentSlots = @{
 }
 
 
- $theAppName = $repo.Substring($repo.lastIndexOf('.')+1).ToLower()
+ ##$theAppName = $repo.Substring($repo.lastIndexOf('.')+1).ToLower()
 
  $image =  $repo.ToLower()
 
