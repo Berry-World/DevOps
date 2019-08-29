@@ -11,6 +11,8 @@ Param(
   [string]$dockerPath,
   [Parameter(Mandatory=$true)]
   [string]$theAppName,
+  [Parameter(Mandatory=$false)]
+  [string]$replica = 2,
 )
 
 
