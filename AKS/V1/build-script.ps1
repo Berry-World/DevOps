@@ -28,8 +28,15 @@ If ($branchName -like "master")
 If ($branchName -like "deploy/dev*")
 {$aspnetEnvName="Development"}
 
+If ($branchName -like "aks-poc/dev*")
+{$aspnetEnvName="Development"}
+
 If ($branchName -like "deploy/tst*")
 {$aspnetEnvName="Test"}
+
+If ($branchName -like "aks-poc/tst*")
+{$aspnetEnvName="Test"}
+ 
  
 If ($branchName -like "deploy/feature*")
 {$aspnetEnvName="Feature"}
