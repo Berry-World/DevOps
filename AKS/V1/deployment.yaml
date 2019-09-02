@@ -4,7 +4,7 @@ metadata:
   name: #{the_app}#-#{environment}#-#{slot}#
   namespace: #{environment}#
 spec:  
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: #{the_app}#-#{environment}#-#{slot}#
