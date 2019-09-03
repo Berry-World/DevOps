@@ -5,11 +5,11 @@ metadata:
   namespace: #{environment}#
   labels:
     shortName: #{the_app}#
-    environment: #{environment}#
+    #environment: #{environment}#
     app: #{the_app}#-#{environment}#-#{slot}#
-    deploymentSlot:  #{slot}#
-    buildId: #{buidId}#
-    dockerImageTag: #{tag}#
+    #deploymentSlot:  #{slot}#
+    #buildId: #{buidId}#
+    #dockerImageTag: #{tag}#
 spec:  
   replicas: #{replica}#
   selector:
@@ -24,11 +24,11 @@ spec:
     metadata:  
       labels:  
         shortName: #{the_app}#
-        environment: #{environment}#
+        #environment: #{environment}#
         app: #{the_app}#-#{environment}#-#{slot}#
-        deploymentSlot:  #{slot}#
-        buildId: #{buidId}#
-        dockerImageTag: #{tag}#
+        #deploymentSlot:  #{slot}#
+        #buildId: #{buidId}#
+        #dockerImageTag: #{tag}#
     spec:  
       containers:  
       - name: #{the_app}#-#{environment}#-#{slot}#
