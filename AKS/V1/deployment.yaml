@@ -5,9 +5,9 @@ metadata:
   namespace: #{environment}#
   labels:
     shortName: #{the_app}#
-    #environment: #{environment}#
+    environment: #{environment}#
     app: #{the_app}#-#{environment}#-#{slot}#
-    #deploymentSlot:  #{slot}#
+    deploymentSlot:  #{slot}#
     #buildId: #{buidId}#
     #dockerImageTag: #{tag}#
 spec:  
@@ -24,9 +24,9 @@ spec:
     metadata:  
       labels:  
         shortName: #{the_app}#
-        #environment: #{environment}#
+        environment: #{environment}#
         app: #{the_app}#-#{environment}#-#{slot}#
-        #deploymentSlot:  #{slot}#
+        deploymentSlot:  #{slot}#
         #buildId: #{buidId}#
         #dockerImageTag: #{tag}#
     spec:  
