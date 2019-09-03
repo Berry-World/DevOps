@@ -56,6 +56,13 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: #{the_app}#-#{environment}#-#{slot}#
   namespace: #{environment}#
+  labels:
+    shortName: #{the_app}#
+    environment: #{environment}#
+    app: #{the_app}#-#{environment}#-#{slot}#
+    deploymentSlot:  #{slot}#
+    buildId: "#{buidId}#"
+    dockerImageTag: #{tag}#
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
