@@ -3,6 +3,10 @@ kind: Service
 metadata: 
   name: #{the_app}#-#{environment}#-#{slot}#
   namespace: #{environment}#
+  abels:
+    environment: #{environment}#
+    app: #{the_app}#
+    deploymentSlot:  #{slot}#
 spec: 
   type: LoadBalancer  #ClusterIP 
   ports: 
