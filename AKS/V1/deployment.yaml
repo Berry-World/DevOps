@@ -27,8 +27,8 @@ spec:
         environment: #{environment}#
         app: #{the_app}#-#{environment}#-#{slot}#
         deploymentSlot:  #{slot}#
-        #buildId: "#{buidId}#"
-        #dockerImageTag: #{tag}#
+        buildId: "#{buidId}#"
+        dockerImageTag: #{tag}#
     spec:  
       containers:  
       - name: #{the_app}#-#{environment}#-#{slot}#
