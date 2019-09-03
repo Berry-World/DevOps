@@ -4,11 +4,14 @@ metadata:
   name: #{the_app}#-#{environment}#-#{slot}#
   namespace: #{environment}#
   labels:
+    shortName: #{the_app}#
     environment: #{environment}#
-    app: #{the_app}#
+    app: #{the_app}#-#{environment}#-#{slot}#
     deploymentSlot:  #{slot}#
+    buildId: #{buidId}#
+    dockerImageTag: #{tag}#
 spec:  
-  replicas: 1
+  replicas: #{replica}#
   selector:
     matchLabels:
       app: #{the_app}#-#{environment}#-#{slot}#
@@ -20,7 +23,12 @@ spec:
   template:
     metadata:  
       labels:  
+        shortName: #{the_app}#
+        environment: #{environment}#
         app: #{the_app}#-#{environment}#-#{slot}#
+        deploymentSlot:  #{slot}#
+        buildId: #{buidId}#
+        dockerImageTag: #{tag}#
     spec:  
       containers:  
       - name: #{the_app}#-#{environment}#-#{slot}#
