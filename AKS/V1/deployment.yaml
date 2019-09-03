@@ -3,6 +3,10 @@ kind: Deployment
 metadata:  
   name: #{the_app}#-#{environment}#-#{slot}#
   namespace: #{environment}#
+  labels:
+    environment: #{environment}#
+    app: #{the_app}#
+    deploymentSlot:  #{slot}#
 spec:  
   replicas: 1
   selector:
