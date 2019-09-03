@@ -12,8 +12,17 @@ Param(
   [Parameter(Mandatory=$true)]
   [string]$app,
   [Parameter(Mandatory=$false)]
-  [string]$replica = 2
+  [Int]$replica = 2
+  #[Parameter(Mandatory=$false)]
+  #[boolean]$dockerReplace = $false
+  #[Parameter(Mandatory=$false)]
+  #[string]$dockerBase = 'mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim'
+  #[Parameter(Mandatory=$false)]
+  #[decimal]$dockerBaseKey = 2.1
+  
 )
+#microsoft/dotnet:2.1-aspnetcore-runtime
+#mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim
 
 
 $branchName= $branch.Substring(11)
@@ -121,7 +130,9 @@ for ($i=1; $i -le 8; $i++)
         '#{public-slot}#'  = $publicPodsSlots[$i]
         '#{image}#'        = $image
         '#{tag}#'          = $id + '-' + $envTag
+        '#{buidId}#'       = $id
         '#{warm_up_path}#' = $warm_up_path
+        '#{replica}#'      = $replica
     }
 
 
