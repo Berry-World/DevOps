@@ -3,7 +3,7 @@ kind: Service
 metadata: 
   name: #{the_app}#-#{environment}#-#{slot}#
   namespace: #{environment}#
-  abels:
+  labels:
     environment: #{environment}#
     app: #{the_app}#
     deploymentSlot:  #{slot}#
