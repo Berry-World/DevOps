@@ -12,7 +12,8 @@ metadata:
     dockerImageTag: #{tag}#
         
 spec: 
-  type: LoadBalancer  #ClusterIP 
+  type: #{serviceType}#
+  #LoadBalancer  #ClusterIP 
   ports: 
   - port: 80
     targetPort: 80
