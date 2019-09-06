@@ -116,6 +116,16 @@ $slots = @{
     8='green'
 }
 
+$serviceType = @{
+    1='ClusterIP'
+    2='ClusterIP'
+    3='ClusterIP'
+    4='LoadBalancer' #Blue deployment would be testable
+    5='LoadBalancer' #Blue deployment would be testable
+    6='ClusterIP'
+    7='ClusterIP'
+    8='ClusterIP'
+}
 
  ##$theAppName = $repo.Substring($repo.lastIndexOf('.')+1).ToLower()
 
@@ -133,6 +143,7 @@ for ($i=1; $i -le 8; $i++)
         '#{buidId}#'       = $id
         '#{warm_up_path}#' = $warm_up_path
         '#{replica}#'      = $replica
+        '#{serviceType}#'  = $serviceType[$i]
     }
 
 
