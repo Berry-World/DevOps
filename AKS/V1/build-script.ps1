@@ -12,7 +12,7 @@ Param(
   [Parameter(Mandatory=$true)]
   [string]$app,
   [Parameter(Mandatory=$false)]
-  [Int]$replica = 2
+  [Int]$replica = 1
   #[Parameter(Mandatory=$false)]
   #[boolean]$dockerReplace = $false
   #[Parameter(Mandatory=$false)]
