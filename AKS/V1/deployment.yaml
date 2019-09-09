@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment  
 metadata:  
   name: #{the_app}#-#{environment}#-#{slot}#
-  namespace: #{environment}#
+  namespace: #{namespace}#
   labels:
     shortName: #{the_app}#
     environment: #{environment}#
