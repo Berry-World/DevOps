@@ -35,22 +35,36 @@ $branchName= $branch.Substring(11)
 
 $aspnetEnvName= "Local"
 $envTag= "local"
+$namespace= ""
 ###$envDestination = "Local"
+
 
 If ($branchName -like "master")
 {$aspnetEnvName="Production"}
 
 If ($branchName -like "deploy/dev*")
-{$aspnetEnvName="Development"}
+{
+$aspnetEnvName="Development"
+$namespace= $branchName  -replace "(deploy)\/(dev[a-z0-9]+)\/(.*)",'$2'
+}
 
 If ($branchName -like "aks-poc/dev*")
-{$aspnetEnvName="Development"}
+{
+$aspnetEnvName="Development"
+$namespace= $branchName  -replace "(aks-poc)\/(dev[a-z0-9]+)\/(.*)",'$2'
+}
 
 If ($branchName -like "deploy/tst*")
-{$aspnetEnvName="Test"}
+{
+$aspnetEnvName="Test"
+$namespace= $branchName  -replace "(deploy)\/(tst[a-z0-9]+)\/(.*)",'$2'
+}
 
 If ($branchName -like "aks-poc/tst*")
-{$aspnetEnvName="Test"}
+{
+$aspnetEnvName="Test"
+$namespace= $branchName  -replace "(aks-poc)\/(tst[a-z0-9]+)\/(.*)",'$2'
+}
  
  
 If ($branchName -like "deploy/feature*")
@@ -70,15 +84,18 @@ Write-Host  "##vso[task.setvariable variable=envTag;isOutput=true;]$envTag"
 
 
 
+$namespaceUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/namespace.yaml'
 $deployUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/deployment.yaml'
 $serviceUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/service.yaml'
 $dockerUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/Dockerfile'
 
 
+$namespaceFile='PipelineScripts/k8s/namespace-v1.yaml'
 $deploy='PipelineScripts/k8s/deployment-v1.yaml'
 $service='PipelineScripts/k8s/service-v1.yaml'
 
 
+Invoke-WebRequest $namespaceUri  -OutFile $namespaceFile
 Invoke-WebRequest $deployUri  -OutFile $deploy
 Invoke-WebRequest $serviceUri  -OutFile $service
 
@@ -87,13 +104,14 @@ $deploy='PipelineScripts/k8s/deployment-v1.yaml'
 $service='PipelineScripts/k8s/service-v1.yaml'
 
 " #### Copy yaml files"
-Copy-Item $deploy -Destination 'PipelineScripts/k8s/step1.yaml'
-Copy-Item $service -Destination 'PipelineScripts/k8s/step2.yaml'
-Copy-Item $service -Destination 'PipelineScripts/k8s/step3.yaml'
-Copy-Item $deploy -Destination 'PipelineScripts/k8s/step4.yaml'
-Copy-Item $service -Destination 'PipelineScripts/k8s/step5.yaml'
-Copy-Item $service -Destination 'PipelineScripts/k8s/step6.yaml'
-Copy-Item $service -Destination 'PipelineScripts/k8s/step7.yaml'
+Copy-Item $namespaceUri -Destination 'PipelineScripts/k8s/step0.yaml'
+Copy-Item $deploy       -Destination 'PipelineScripts/k8s/step1.yaml'
+Copy-Item $service      -Destination 'PipelineScripts/k8s/step2.yaml'
+Copy-Item $service      -Destination 'PipelineScripts/k8s/step3.yaml'
+Copy-Item $deploy       -Destination 'PipelineScripts/k8s/step4.yaml'
+Copy-Item $service      -Destination 'PipelineScripts/k8s/step5.yaml'
+Copy-Item $service      -Destination 'PipelineScripts/k8s/step6.yaml'
+Copy-Item $service      -Destination 'PipelineScripts/k8s/step7.yaml'
 Copy-Item $deploy -Destination 'PipelineScripts/k8s/step8.yaml'
 ####
 
@@ -101,7 +119,6 @@ Copy-Item $deploy -Destination 'PipelineScripts/k8s/step8.yaml'
 " #### Copy Dockerfile"
 Copy-Item $dockerUri -Destination 'PipelineScripts/k8s/Dockerfile'
 ####
-
 
 
 
@@ -145,10 +162,11 @@ $serviceType = @{
 
  $image =  $repo.ToLower()
 
-for ($i=1; $i -le 8; $i++)
+for ($i=0; $i -le 8; $i++)
 {
     $hashTable = @{
         '#{the_app}#'      = $app
+        '#{namespace}#'    = $namespace 
         '#{environment}#'  = $envTag.ToLower() 
         '#{slot}#'         = $slots[$i]
         '#{public-slot}#'  = $publicPodsSlots[$i]
