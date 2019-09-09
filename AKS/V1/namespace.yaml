@@ -4,3 +4,6 @@ metadata:
   name: #{namespace}#
   labels:
     name: #{namespace}#
+    buildId: "#{buidId}#"
+    environment: #{environment}#
+
