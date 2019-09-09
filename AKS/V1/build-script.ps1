@@ -105,14 +105,14 @@ $deploy='PipelineScripts/k8s/deployment-v1.yaml'
 $service='PipelineScripts/k8s/service-v1.yaml'
 
 " #### Copy yaml files"
-Copy-Item $namespaceUri -Destination 'PipelineScripts/k8s/step0.yaml'
-Copy-Item $deploy       -Destination 'PipelineScripts/k8s/step1.yaml'
-Copy-Item $service      -Destination 'PipelineScripts/k8s/step2.yaml'
-Copy-Item $service      -Destination 'PipelineScripts/k8s/step3.yaml'
-Copy-Item $deploy       -Destination 'PipelineScripts/k8s/step4.yaml'
-Copy-Item $service      -Destination 'PipelineScripts/k8s/step5.yaml'
-Copy-Item $service      -Destination 'PipelineScripts/k8s/step6.yaml'
-Copy-Item $service      -Destination 'PipelineScripts/k8s/step7.yaml'
+Copy-Item $namespaceFile -Destination 'PipelineScripts/k8s/step0.yaml'
+Copy-Item $deploy        -Destination 'PipelineScripts/k8s/step1.yaml'
+Copy-Item $service       -Destination 'PipelineScripts/k8s/step2.yaml'
+Copy-Item $service       -Destination 'PipelineScripts/k8s/step3.yaml'
+Copy-Item $deploy        -Destination 'PipelineScripts/k8s/step4.yaml'
+Copy-Item $service       -Destination 'PipelineScripts/k8s/step5.yaml'
+Copy-Item $service       -Destination 'PipelineScripts/k8s/step6.yaml'
+Copy-Item $service       -Destination 'PipelineScripts/k8s/step7.yaml'
 Copy-Item $deploy -Destination 'PipelineScripts/k8s/step8.yaml'
 ####
 
