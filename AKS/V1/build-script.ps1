@@ -72,6 +72,7 @@ Write-Host  "##vso[task.setvariable variable=envTag;isOutput=true;]$envTag"
 
 $deployUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/deployment.yaml'
 $serviceUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/service.yaml'
+$dockerUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/Dockerfile'
 
 
 $deploy='PipelineScripts/k8s/deployment-v1.yaml'
@@ -95,6 +96,13 @@ Copy-Item $service -Destination 'PipelineScripts/k8s/step6.yaml'
 Copy-Item $service -Destination 'PipelineScripts/k8s/step7.yaml'
 Copy-Item $deploy -Destination 'PipelineScripts/k8s/step8.yaml'
 ####
+
+
+" #### Copy Dockerfile"
+Copy-Item $dockerUri -Destination 'PipelineScripts/k8s/Dockerfile'
+####
+
+
 
 
 "###Changing the image tag & service name in the yaml file###  " + $envTag 
@@ -182,19 +190,25 @@ if ( $dockerReplace -eq $false)
 }
 else
 {
+  ### replace the docker file to $dockerPath
+  Copy-Item 'PipelineScripts/k8s/Dockerfile' -Destination $dockerPath  -Force
+  
   $hashTableDocker = @{
-        '#{entrypoint}#'      = $dockerEntrypoint
-        '#{environment}#'  = $envTag.ToLower() 
-        '#{slot}#'         = $slots[$i]
-        '#{public-slot}#'  = $publicPodsSlots[$i]
-        '#{image}#'        = $image
-        '#{tag}#'          = $id + '-' + $envTag
-        '#{buidId}#'       = $id
-        '#{warm_up_path}#' = $warm_up_path
-        '#{replica}#'      = $replica
-        '#{serviceType}#'  = $serviceType[$i]
-    }
+    '#{entrypoint}#'  = $dockerEntrypoint
+    '#{environment}#' = $envTag.ToLower() 
+    '#{dockerImage}#' = $slots[$i]
+  }
+  
 
+  foreach ($key in $hashTableDocker.GetEnumerator()) {
+    "Docker keyName  = " + $key.Name 
+    "Docker keyValue = " + $key.Value
+    "  "
 
+    $oldValue = $key.Name
+    $newValue = $key.Value
+
+    (Get-Content $fullPathYaml) -replace $oldValue  , $newValue    | Set-Content $dockerPath
+  } 
 }
 
