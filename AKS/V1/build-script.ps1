@@ -12,18 +12,24 @@ Param(
   [Parameter(Mandatory=$true)]
   [string]$app,
   [Parameter(Mandatory=$false)]
-  [Int]$replica = 1
-  #[Parameter(Mandatory=$false)]
-  #[boolean]$dockerReplace = $false
-  #[Parameter(Mandatory=$false)]
-  #[string]$dockerBase = 'mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim'
-  #[Parameter(Mandatory=$false)]
-  #[decimal]$dockerBaseKey = 2.1
+  [Int]$replica = 1,
+  [Parameter(Mandatory=$false)]
+  [boolean]$dockerReplace = $false,
+  [Parameter(Mandatory=$false)]
+  [string]$dockerBase = 'mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim',
+  [Parameter(Mandatory=$false)]
+  [decimal]$dockerBaseKey = 0,  #2.1,
+  [Parameter(Mandatory=$true)]
+  [string]$dockerEntrypoint = ""
   
 )
 #microsoft/dotnet:2.1-aspnetcore-runtime
 #mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim
 
+if ($dockerEntrypoint -eq "" )
+{
+  $dockerEntrypoint = $repo + ".Api.dll"
+}
 
 $branchName= $branch.Substring(11)
 
@@ -167,9 +173,28 @@ for ($i=1; $i -le 8; $i++)
 
 
 "###changing the environment variable in docker file### " + $aspnetEnvName 
+if ( $dockerReplace -eq $false)
+{
+  $oldValue = 'ENV ASPNETCORE_ENVIRONMENT=Local'
+  $newValue = 'ENV ASPNETCORE_ENVIRONMENT=' +  $aspnetEnvName
 
-$oldValue = 'ENV ASPNETCORE_ENVIRONMENT=Local'
-$newValue = 'ENV ASPNETCORE_ENVIRONMENT=' +  $aspnetEnvName
+  (Get-Content $dockerPath) -replace $oldValue  , $newValue    | Set-Content $dockerPath
+}
+else
+{
+  $hashTableDocker = @{
+        '#{entrypoint}#'      = $dockerEntrypoint
+        '#{environment}#'  = $envTag.ToLower() 
+        '#{slot}#'         = $slots[$i]
+        '#{public-slot}#'  = $publicPodsSlots[$i]
+        '#{image}#'        = $image
+        '#{tag}#'          = $id + '-' + $envTag
+        '#{buidId}#'       = $id
+        '#{warm_up_path}#' = $warm_up_path
+        '#{replica}#'      = $replica
+        '#{serviceType}#'  = $serviceType[$i]
+    }
 
-(Get-Content $dockerPath) -replace $oldValue  , $newValue    | Set-Content $dockerPath
+
+}
 
