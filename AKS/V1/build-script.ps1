@@ -96,9 +96,11 @@ $deploy='PipelineScripts/k8s/deployment-v1.yaml'
 $service='PipelineScripts/k8s/service-v1.yaml'
 
 
+
 Invoke-WebRequest $namespaceUri  -OutFile $namespaceFile
 Invoke-WebRequest $deployUri  -OutFile $deploy
 Invoke-WebRequest $serviceUri  -OutFile $service
+Invoke-WebRequest $dockerUri  -OutFile 'PipelineScripts/k8s/Dockerfile'
 
 
 $deploy='PipelineScripts/k8s/deployment-v1.yaml'
@@ -116,11 +118,7 @@ Copy-Item $service       -Destination 'PipelineScripts/k8s/step7.yaml'
 Copy-Item $deploy -Destination 'PipelineScripts/k8s/step8.yaml'
 ####
 
-
-" #### Copy Dockerfile"
-Copy-Item $dockerUri -Destination 'PipelineScripts/k8s/Dockerfile'
-####
-
+ 
 
 
 "###Changing the image tag & service name in the yaml file###  " + $envTag 
