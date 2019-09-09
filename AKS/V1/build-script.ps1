@@ -43,28 +43,46 @@ $namespace= ""
 If ($branchName -like "master")
 {$aspnetEnvName="Production"}
 
-If ($branchName -like "deploy/dev*")
+
+
+If ($branchName -like "deploy/dev/*")
 {
-$aspnetEnvName="Development"
-$namespace= $branchName  -replace "(deploy)\/(dev[a-z0-9]+)\/(.*)",'$2'
+  $aspnetEnvName="Development"
+  $namespace= $branchName  -replace "(deploy)\/(dev)\/(.*)",'$2'
+}elseif ($branchName -like "deploy/dev*/*")
+{
+  $aspnetEnvName="Development"
+  $namespace= $branchName  -replace "(deploy)\/(dev[a-z0-9]+)\/(.*)",'$2'
 }
 
 If ($branchName -like "aks-poc/dev*")
 {
-$aspnetEnvName="Development"
-$namespace= $branchName  -replace "(aks-poc)\/(dev[a-z0-9]+)\/(.*)",'$2'
+  $aspnetEnvName="Development"
+  $namespace= $branchName  -replace "(aks-poc)\/(dev)\/(.*)",'$2'
+}elseIf ($branchName -like "aks-poc/dev*/*")
+{
+  $aspnetEnvName="Development"
+  $namespace= $branchName  -replace "(aks-poc)\/(dev[a-z0-9]+)\/(.*)",'$2'
 }
 
-If ($branchName -like "deploy/tst*")
+If ($branchName -like "deploy/tst*/*")
 {
-$aspnetEnvName="Test"
-$namespace= $branchName  -replace "(deploy)\/(tst[a-z0-9]+)\/(.*)",'$2'
+  $aspnetEnvName="Test"
+  $namespace= $branchName  -replace "(deploy)\/(tst)\/(.*)",'$2'
+}elseIf ($branchName -like "deploy/tst*/*")
+{
+  $aspnetEnvName="Test"
+  $namespace= $branchName  -replace "(deploy)\/(tst[a-z0-9]+)\/(.*)",'$2'
 }
 
-If ($branchName -like "aks-poc/tst*")
+If ($branchName -like "aks-poc/tst/*")
 {
-$aspnetEnvName="Test"
-$namespace= $branchName  -replace "(aks-poc)\/(tst[a-z0-9]+)\/(.*)",'$2'
+  $aspnetEnvName="Test"
+  $namespace= $branchName  -replace "(aks-poc)\/(tst\/(.*)",'$2'
+}elseIf ($branchName -like "aks-poc/tst*/*")
+{
+  $aspnetEnvName="Test"
+  $namespace= $branchName  -replace "(aks-poc)\/(tst[a-z0-9]+)\/(.*)",'$2'
 }
  
  
