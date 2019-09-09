@@ -1,10 +1,10 @@
 Param(
   [Parameter(Mandatory=$true)]
-  [string]$branch, #$(Build.SourceBranch)
+  [string]$branch,
   [Parameter(Mandatory=$true)]
-  [string]$repo,  #$(Build.Repository.Name)
+  [string]$repo, 
   [Parameter(Mandatory=$true)]
-  [string]$id,   #$(Build.BuildId)
+  [string]$id,  
   [Parameter(Mandatory=$false)]
   [string]$warm_up_path = '' ,
   [Parameter(Mandatory=$true)]
@@ -19,10 +19,11 @@ Param(
   [string]$dockerBase = 'mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim',
   [Parameter(Mandatory=$false)]
   [decimal]$dockerBaseKey = 0,  #2.1,
-  [Parameter(Mandatory=$true)]
+  [Parameter(Mandatory=$false)]
   [string]$dockerEntrypoint = ""
   
 )
+# example of .netcore images
 #microsoft/dotnet:2.1-aspnetcore-runtime
 #mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim
 
@@ -201,6 +202,7 @@ for ($i=0; $i -le 8; $i++)
 "###changing the environment variable in docker file### " + $aspnetEnvName 
 if ( $dockerReplace -eq $false)
 {
+"################### modifing the existing docker file  ##########################"
   $oldValue = 'ENV ASPNETCORE_ENVIRONMENT=Local'
   $newValue = 'ENV ASPNETCORE_ENVIRONMENT=' +  $aspnetEnvName
 
@@ -208,7 +210,7 @@ if ( $dockerReplace -eq $false)
 }
 else
 {
-  ### replace the docker file to $dockerPath
+ " ####################### replace the docker file to $dockerPath #############" 
   Copy-Item 'PipelineScripts/k8s/Dockerfile' -Destination $dockerPath  -Force
   
   $hashTableDocker = @{
