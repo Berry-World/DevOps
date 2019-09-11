@@ -22,7 +22,7 @@ Param(
   [Parameter(Mandatory=$false)]
   [string]$dockerEntrypoint = "",
   [Parameter(Mandatory=$false)]
-  [boolean]$showModifiedFiles = $true,
+  [boolean]$showModifiedFiles = $true
   
 )
 # example of .netcore images
