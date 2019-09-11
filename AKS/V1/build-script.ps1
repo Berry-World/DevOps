@@ -48,7 +48,7 @@ $namespace= ""
 If ($branchName -like "master")
 {
   $aspnetEnvName="Production"
-  Write-Host $addTag"prod"
+  #Write-Host $addTag"prod"
 }
 
 
@@ -57,69 +57,69 @@ If ($branchName -like "deploy/dev/*")
 {
   $aspnetEnvName="Development"
   $namespace= $branchName  -replace "(deploy)\/(dev)\/(.*)",'$2'
-  Write-Host $addTag"dev"
+  #Write-Host $addTag"dev"
 }elseif ($branchName -like "deploy/dev*/*")
 {
   $aspnetEnvName="Development"
   $namespace= $branchName  -replace "(deploy)\/(dev[a-z0-9]+)\/(.*)",'$2'
-  Write-Host $addTag"dev"
+  #Write-Host $addTag"dev"
 }
 
 If ($branchName -like "aks-poc/dev*")
 {
   $aspnetEnvName="Development"
   $namespace= $branchName  -replace "(aks-poc)\/(dev)\/(.*)",'$2'
-  Write-Host $addTag"poc-dev"
+  #Write-Host $addTag"poc-dev"
 }elseIf ($branchName -like "aks-poc/dev*/*")
 {
   $aspnetEnvName="Development"
   $namespace= $branchName  -replace "(aks-poc)\/(dev[a-z0-9]+)\/(.*)",'$2'
-  Write-Host $addTag"poc-dev"
+  #Write-Host $addTag"poc-dev"
 }
 
 If ($branchName -like "deploy/tst/*")
 {
   $aspnetEnvName="Test"
   $namespace= $branchName  -replace "(deploy)\/(tst)\/(.*)",'$2'
-  Write-Host $addTag"tst"
+  #Write-Host $addTag"tst"
 }elseIf ($branchName -like "deploy/tst*/*")
 {
   $aspnetEnvName="Test"
   $namespace= $branchName  -replace "(deploy)\/(tst[a-z0-9]+)\/(.*)",'$2'
-  Write-Host $addTag"tst"
-  Write-Host $addTag+$namespace
+  #Write-Host $addTag"tst"
+  #Write-Host $addTag+$namespace
 }
 
 If ($branchName -like "aks-poc/tst/*")
 {
   $aspnetEnvName="Test"
   $namespace= $branchName  -replace "(aks-poc)\/(tst\/(.*)",'$2'
-  Write-Host $addTag"poc-tst"
+  #Write-Host $addTag"poc-tst"
 }elseIf ($branchName -like "aks-poc/tst*/*")
 {
   $aspnetEnvName="Test"
   $namespace= $branchName  -replace "(aks-poc)\/(tst[a-z0-9]+)\/(.*)",'$2'
-  Write-Host $addTag"poc-tst"
-  Write-Host $addTag+$namespace
+  #Write-Host $addTag"poc-tst"
+  #Write-Host $addTag+$namespace
 }
  
  
 If ($branchName -like "deploy/feature*")
 {
   $aspnetEnvName="Feature"
-  Write-Host $addTag"feature"
+  #Write-Host $addTag"feature"
 }
 
 If ($branchName -like "deploy/hotfix*")
 {
   $aspnetEnvName="Hotfix"
-  Write-Host $addTag"hotfix"
+  #Write-Host $addTag"hotfix"
 }
 
 If ($branchName -like "deploy/poc*")
 {
   $aspnetEnvName="Poc"
-  Write-Host $addTag"poc"
+  #Write-Host $addTag"poc"
 }
 
 "#########################  END OF the tagging based on branch name. #########################"
