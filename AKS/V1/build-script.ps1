@@ -290,7 +290,7 @@ else
   $hashTableDocker = @{
     '#{entrypoint}#'  = $dockerEntrypoint
     '#{environment}#' = $envTag.ToLower() 
-    '#{dockerImage}#' = $slots[$i]
+    '#{dockerImage}#' = $dockerBase 
   }
   
 
