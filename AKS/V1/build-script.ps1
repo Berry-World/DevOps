@@ -302,7 +302,7 @@ else
     $oldValue = $key.Name
     $newValue = $key.Value
 
-    (Get-Content $fullPathYaml) -replace $oldValue  , $newValue    | Set-Content $dockerPath
+    (Get-Content $dockerPath) -replace $oldValue  , $newValue    | Set-Content $dockerPath
   } 
 }
 
