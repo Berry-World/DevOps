@@ -167,10 +167,10 @@ $slots = @{
 $serviceType = @{
     1='ClusterIP'
     2='ClusterIP'
-    3='ClusterIP'
-    4='LoadBalancer' #Blue deployment would be testable
-    5='LoadBalancer' #Blue deployment would be testable
-    6='ClusterIP'
+    3='LoadBalancer' #let the public to be reachable by external DNS 
+    4='ClusterIP'  
+    5='ClusterIP'  
+    6='LoadBalancer' #let the public to be reachable by external DNS 
     7='ClusterIP'
     8='ClusterIP'
 }
