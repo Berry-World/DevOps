@@ -297,6 +297,7 @@ else
   foreach ($key in $hashTableDocker.GetEnumerator()) {
     "Docker keyName  = " + $key.Name 
     "Docker keyValue = " + $key.Value
+    "Docker path = " +  $dockerPath
     "  "
 
     $oldValue = $key.Name
