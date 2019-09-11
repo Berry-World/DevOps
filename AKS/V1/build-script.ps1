@@ -125,7 +125,7 @@ If ($branchName -like "deploy/poc*")
 "#########################  Tag the build based on the last git tag. #########################"
 
 
-$tag = git tag
+#$tag = git tag
 
 
 # support multiple tags , as they would come as array
