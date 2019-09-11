@@ -129,23 +129,23 @@ $tag = git tag
 
 
 # support multiple tags , as they would come as array
-if (  ($tag -is [system.array] ) -and ( $tag.Count -gt 0)) 
-{
-    # we are only interested on the last tag.
-    $tag = $tag[$tag.Count -1]
-}
-
-# the previous if is suppose to convert array onto string
-# however maybe you have only one single tag e.g.the first ever tag for your code
-if ( $tag -is [system.string])
-{
-    if ( $tag -like "deploy:*")
-    {
-        $environment = $tag.ToLower().Replace("deploy:", "")
-        $addTagCode = "##vso[build.addbuildtag]" + $environment
-        Write-Host $addTagCode
-    } 
-}
+#if (  ($tag -is [system.array] ) -and ( $tag.Count -gt 0)) 
+#{
+#    # we are only interested on the last tag.
+#    $tag = $tag[$tag.Count -1]
+#}
+#
+## the previous if is suppose to convert array onto string
+## however maybe you have only one single tag e.g.the first ever tag for your code
+#if ( $tag -is [system.string])
+#{
+#    if ( $tag -like "deploy:*")
+#    {
+#        #$environment = $tag.ToLower().Replace("deploy:", "")
+#        #$addTagCode = "##vso[build.addbuildtag]" + $environment
+#        #Write-Host $addTagCode
+#    } 
+#}
  
 
 "#########################  End of the git tag. #########################"
