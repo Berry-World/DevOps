@@ -20,7 +20,9 @@ Param(
   [Parameter(Mandatory=$false)]
   [decimal]$dockerBaseKey = 0,  #2.1,
   [Parameter(Mandatory=$false)]
-  [string]$dockerEntrypoint = ""
+  [string]$dockerEntrypoint = "",
+  [Parameter(Mandatory=$false)]
+  [boolean]$showModifiedFiles = $true,
   
 )
 # example of .netcore images
@@ -270,6 +272,16 @@ for ($i=0; $i -le 8; $i++)
 
         (Get-Content $fullPathYaml) -replace $oldValue  , $newValue    | Set-Content $fullPathYaml
     } 
+    
+    if ($showModifiedFiles -eq $true)
+    {
+      "#######  $showModifiedFiles = $true #####"
+            "Path : " + $showModifiedFiles
+      "   "
+      Get-Content $fullPathYaml
+      "#######  END OF $showModifiedFiles = $true #####"
+    }
+    
 }
 
 
@@ -281,6 +293,17 @@ if ( $dockerReplace -eq $false)
   $newValue = 'ENV ASPNETCORE_ENVIRONMENT=' +  $aspnetEnvName
 
   (Get-Content $dockerPath) -replace $oldValue  , $newValue    | Set-Content $dockerPath
+  
+  
+    if ($showModifiedFiles -eq $true)
+    {
+      "#######  $showModifiedFiles = $true -- local docker file#####"
+      "Path : " + $showModifiedFiles
+      "   "
+      (Get-Content $dockerPath) 
+      "#######  END OF $showModifiedFiles = $true #####"
+    }
+    
 }
 else
 {
@@ -305,5 +328,15 @@ else
 
     (Get-Content $dockerPath) -replace $oldValue  , $newValue    | Set-Content $dockerPath
   } 
+  
+  if ($showModifiedFiles -eq $true)
+    {
+      "#######  $showModifiedFiles = $true -- modified docker file#####"
+      "Path : " + $showModifiedFiles
+      "   "
+      (Get-Content $dockerPath) 
+      "#######  END OF $showModifiedFiles = $true #####"
+    }
+    
 }
 
