@@ -312,7 +312,7 @@ else
   
   $hashTableDocker = @{
     '#{entrypoint}#'  = $dockerEntrypoint
-    '#{environment}#' = $envTag.ToLower() 
+    '#{environment}#' = $aspnetEnvName 
     '#{dockerImage}#' = $dockerBase 
   }
   
