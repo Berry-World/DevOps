@@ -33,6 +33,7 @@ if ($dockerEntrypoint -eq "" )
 }
 
 $branchName= $branch.Substring(11)
+$addTag = "##vso[build.addbuildtag]"
 
 $aspnetEnvName= "Local"
 $envTag= "local"
@@ -41,7 +42,10 @@ $namespace= ""
 
 
 If ($branchName -like "master")
-{$aspnetEnvName="Production"}
+{
+  $aspnetEnvName="Production"
+  Write-Host $addTag"prod"
+}
 
 
 
@@ -49,51 +53,70 @@ If ($branchName -like "deploy/dev/*")
 {
   $aspnetEnvName="Development"
   $namespace= $branchName  -replace "(deploy)\/(dev)\/(.*)",'$2'
+  Write-Host $addTag"dev"
 }elseif ($branchName -like "deploy/dev*/*")
 {
   $aspnetEnvName="Development"
   $namespace= $branchName  -replace "(deploy)\/(dev[a-z0-9]+)\/(.*)",'$2'
+  Write-Host $addTag"dev"
 }
 
 If ($branchName -like "aks-poc/dev*")
 {
   $aspnetEnvName="Development"
   $namespace= $branchName  -replace "(aks-poc)\/(dev)\/(.*)",'$2'
+  Write-Host $addTag"poc-dev"
 }elseIf ($branchName -like "aks-poc/dev*/*")
 {
   $aspnetEnvName="Development"
   $namespace= $branchName  -replace "(aks-poc)\/(dev[a-z0-9]+)\/(.*)",'$2'
+  Write-Host $addTag"poc-dev"
 }
 
-If ($branchName -like "deploy/tst*/*")
+If ($branchName -like "deploy/tst/*")
 {
   $aspnetEnvName="Test"
   $namespace= $branchName  -replace "(deploy)\/(tst)\/(.*)",'$2'
+  Write-Host $addTag"tst"
 }elseIf ($branchName -like "deploy/tst*/*")
 {
   $aspnetEnvName="Test"
   $namespace= $branchName  -replace "(deploy)\/(tst[a-z0-9]+)\/(.*)",'$2'
+  Write-Host $addTag"tst"
+  Write-Host $addTag+$namespace
 }
 
 If ($branchName -like "aks-poc/tst/*")
 {
   $aspnetEnvName="Test"
   $namespace= $branchName  -replace "(aks-poc)\/(tst\/(.*)",'$2'
+  Write-Host $addTag"poc-tst"
 }elseIf ($branchName -like "aks-poc/tst*/*")
 {
   $aspnetEnvName="Test"
   $namespace= $branchName  -replace "(aks-poc)\/(tst[a-z0-9]+)\/(.*)",'$2'
+  Write-Host $addTag"poc-tst"
+  Write-Host $addTag+$namespace
 }
  
  
 If ($branchName -like "deploy/feature*")
-{$aspnetEnvName="Feature"}
+{
+  $aspnetEnvName="Feature"
+  Write-Host $addTag"feature"
+}
 
 If ($branchName -like "deploy/hotfix*")
-{$aspnetEnvName="Hotfix"}
+{
+  $aspnetEnvName="Hotfix"
+  Write-Host $addTag"hotfix"
+}
 
 If ($branchName -like "deploy/poc*")
-{$aspnetEnvName="Poc"}
+{
+  $aspnetEnvName="Poc"
+  Write-Host $addTag"poc"
+}
 
 $envTag= $aspnetEnvName.ToLower()
 
