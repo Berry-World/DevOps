@@ -163,10 +163,10 @@ Write-Host  "##vso[task.setvariable variable=envTag;isOutput=true;]$envTag"
 
 
 
-$namespaceUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/namespace.yaml'
-$deployUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/deployment.yaml'
-$serviceUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/service.yaml'
-$dockerUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/Dockerfile'
+$namespaceUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/namespace.yaml?'+ (new-guid).ToString()
+$deployUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/deployment.yaml?'+ (new-guid).ToString()
+$serviceUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/service.yaml?'+ (new-guid).ToString()
+$dockerUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/Dockerfile?' + (new-guid).ToString()
 
 
 $namespaceFile='PipelineScripts/k8s/namespace-v1.yaml'
