@@ -22,7 +22,9 @@ Param(
   [Parameter(Mandatory=$false)]
   [string]$dockerEntrypoint = "",
   [Parameter(Mandatory=$false)]
-  [boolean]$showModifiedFiles = $true
+  [boolean]$showModifiedFiles = $true,
+  [Parameter(Mandatory=$false)]
+  [string]$publicServiceType = "ClusterIP"
   
 )
 # example of .netcore images
@@ -227,10 +229,10 @@ $slots = @{
 $serviceType = @{
     1='ClusterIP'
     2='ClusterIP'
-    3='LoadBalancer' #let the public to be reachable by external DNS 
+    3=$publicServiceType   #let the public service to be set by parmeter between LoadBalancer , ClusterIP (default) 
     4='ClusterIP'  
     5='ClusterIP'  
-    6='LoadBalancer' #let the public to be reachable by external DNS 
+    6=$publicServiceType   #let the public service to be set by parmeter between LoadBalancer , ClusterIP (default) 
     7='ClusterIP'
     8='ClusterIP'
 }
