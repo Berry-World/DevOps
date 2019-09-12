@@ -261,8 +261,6 @@ for ($i=0; $i -le 8; $i++)
         '#{minReplicas}#'  = $minReplicas
         '#{maxReplicas}#'  = $maxReplicas
         '#{serviceType}#'  = $serviceType[$i]
-        
-        minReplicas
     }
 
 
