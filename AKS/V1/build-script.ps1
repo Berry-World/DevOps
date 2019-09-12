@@ -14,6 +14,10 @@ Param(
   [Parameter(Mandatory=$false)]
   [Int]$replica = 1,
   [Parameter(Mandatory=$false)]
+  [Int]$minReplicas = 1,
+  [Parameter(Mandatory=$false)]
+  [Int]$maxReplicas = 10,
+  [Parameter(Mandatory=$false)]
   [boolean]$dockerReplace = $false,
   [Parameter(Mandatory=$false)]
   [string]$dockerBase = 'mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim',
@@ -254,7 +258,11 @@ for ($i=0; $i -le 8; $i++)
         '#{buidId}#'       = $id
         '#{warm_up_path}#' = $warm_up_path
         '#{replica}#'      = $replica
+        '#{minReplicas}#'  = $minReplicas
+        '#{maxReplicas}#'  = $maxReplicas
         '#{serviceType}#'  = $serviceType[$i]
+        
+        minReplicas
     }
 
 
