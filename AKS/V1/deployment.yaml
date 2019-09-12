@@ -68,8 +68,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: #{the_app}#-#{environment}#-#{slot}#
-  minReplicas: 1
-  maxReplicas: 10
+  minReplicas: #{minReplicas}#
+  maxReplicas: #{maxReplicas}#
   metrics:
   - type: Resource
     resource:
