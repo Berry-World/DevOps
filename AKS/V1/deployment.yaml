@@ -55,7 +55,7 @@ apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: #{the_app}#-#{environment}#-#{slot}#
-  namespace: #{environment}#
+  namespace: #{namespace}#
   labels:
     shortName: #{the_app}#
     environment: #{environment}#
