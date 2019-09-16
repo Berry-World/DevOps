@@ -222,6 +222,11 @@ Copy-Item $service       -Destination $operationDirectory'step7.yaml'
 Copy-Item $deploy        -Destination $operationDirectory'step8.yaml'
 ####
 
+
+"############ Remove template files "
+Remove-Item  $namespaceFile 
+Remove-Item  $deploy 
+Remove-Item  $service 
  
 
 
@@ -325,7 +330,7 @@ if ( $dockerReplace -eq $false)
   
     if ($showModifiedFiles -eq $true)
     {
-      "#######  $showModifiedFiles = $true -- local docker file#####"
+      "#######  $showModifiedFiles = $true -- local (Original Dockerfile but after modification) docker file#####"
       "Path : " + $showModifiedFiles
       "   "
       (Get-Content $dockerPath) 
@@ -335,7 +340,7 @@ if ( $dockerReplace -eq $false)
 }
 else
 {
- "####################### make sure the path to  new Dockerfile does exist ######"
+ "####################### make sure the path to  new Dockerfile does exist (when you aske to replace it) ######"
  if ($dockerPath.LastIndexOf('\') -ne -1)
  {
     $createFolder4Dockerfile = $dockerPath.Substring(0 , $dockerPath.LastIndexOf('\'))
@@ -353,8 +358,12 @@ else
  
  " ####################### replace the docker file to $dockerPath #############" 
  
- 
+ " ################################### Copy DockerFile into : "$dockerPath
   Copy-Item $tempDockerPath  -Destination $dockerPath  -Force
+  
+ "##################################Removing Temp Dockerfile from : "$tempDockerPath 
+ Remove-Item   $tempDockerPath 
+  
   
   $hashTableDocker = @{
     '#{entrypoint}#'  = $dockerEntrypoint
@@ -377,7 +386,7 @@ else
   
   if ($showModifiedFiles -eq $true)
     {
-      "#######  $showModifiedFiles = $true -- modified docker file#####"
+      "#######  $showModifiedFiles = $true -- modified docker file#####"$dockerPath
       "Path : " + $showModifiedFiles
       "   "
       (Get-Content $dockerPath) 
