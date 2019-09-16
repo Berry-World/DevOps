@@ -321,6 +321,9 @@ for ($i=0; $i -le 8; $i++)
 "###changing the environment variable in docker file### " + $aspnetEnvName 
 if ( $dockerReplace -eq $false)
 {
+ "##################################Removing Temp Dockerfile from : "$tempDockerPath 
+ Remove-Item   $tempDockerPath 
+ 
 "################### modifing the existing docker file  ##########################"
   $oldValue = 'ENV ASPNETCORE_ENVIRONMENT=Local'
   $newValue = 'ENV ASPNETCORE_ENVIRONMENT=' +  $aspnetEnvName
