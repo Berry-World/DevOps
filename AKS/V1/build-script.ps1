@@ -26,7 +26,7 @@ Param(
   [Parameter(Mandatory=$false)]
   [boolean]$showModifiedFiles = $true,
   [Parameter(Mandatory=$true)]
-  [boolean]$operationDirectory,
+  [string]$operationDirectory,
   [Parameter(Mandatory=$false)]
   [string]$publicServiceType = "ClusterIP"
   
