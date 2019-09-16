@@ -316,7 +316,19 @@ if ( $dockerReplace -eq $false)
 }
 else
 {
+ "####################### make sure the path to  new Dockerfile does exist ######"
+ if ($dockerPath.$s.LastIndexOf('\') -ne -1)
+ {
+    $createFolder4Dockerfile = $dockerPath.Substring(0 , $dockerPath.LastIndexOf('\'))
+    New-Item -ItemType Directory -Path $createFolder4Dockerfile -Force
+ }
+ 
+ "####################### [END OF :] make sure the path to  new Dockerfile does exist ######"
+ 
+ 
  " ####################### replace the docker file to $dockerPath #############" 
+ 
+ 
   Copy-Item 'PipelineScripts/k8s/Dockerfile' -Destination $dockerPath  -Force
   
   $hashTableDocker = @{
@@ -346,6 +358,9 @@ else
       (Get-Content $dockerPath) 
       "#######  END OF $showModifiedFiles = $true #####"
     }
+  
+ " ####################### [END OF :] replace the docker file to $dockerPath #############" 
+  
     
 }
 
