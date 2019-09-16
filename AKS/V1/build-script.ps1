@@ -161,6 +161,7 @@ If ($branchName -like "deploy/poc*")
 
 
 
+$app = $app.ToLower()
 $envTag= $aspnetEnvName.ToLower()
 
 
@@ -241,7 +242,7 @@ $serviceType = @{
     8='ClusterIP'
 }
 
- ##$theAppName = $repo.Substring($repo.lastIndexOf('.')+1).ToLower()
+
 
  $image =  $repo.ToLower()
 
