@@ -321,7 +321,7 @@ for ($i=0; $i -le 8; $i++)
 "###changing the environment variable in docker file### " + $aspnetEnvName 
 if ( $dockerReplace -eq $false)
 {
- "##################################Removing Temp Dockerfile from : "$tempDockerPath 
+ "##################################Removing Temp Dockerfile from : " + $tempDockerPath 
  Remove-Item   $tempDockerPath 
  
 "################### modifing the existing docker file  ##########################"
@@ -361,10 +361,10 @@ else
  
  " ####################### replace the docker file to $dockerPath #############" 
  
- " ################################### Copy DockerFile into : "$dockerPath
+ " ################################### Copy DockerFile into : "  + $dockerPath
   Copy-Item $tempDockerPath  -Destination $dockerPath  -Force
   
- "##################################Removing Temp Dockerfile from : "$tempDockerPath 
+ "##################################Removing Temp Dockerfile from : "   +  $tempDockerPath 
  Remove-Item   $tempDockerPath 
   
   
@@ -389,7 +389,7 @@ else
   
   if ($showModifiedFiles -eq $true)
     {
-      "#######  $showModifiedFiles = $true -- modified docker file#####"$dockerPath
+      "#######  $showModifiedFiles = $true -- modified docker file#####"  + $dockerPath
       "Path : " + $showModifiedFiles
       "   "
       (Get-Content $dockerPath) 
