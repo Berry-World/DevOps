@@ -22,8 +22,6 @@ Param(
   [Parameter(Mandatory=$false)]
   [string]$dockerBase = 'mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim',
   [Parameter(Mandatory=$false)]
-  [decimal]$dockerBaseKey = 0,  #2.1,
-  [Parameter(Mandatory=$false)]
   [string]$dockerEntrypoint = "",
   [Parameter(Mandatory=$false)]
   [boolean]$showModifiedFiles = $true,
