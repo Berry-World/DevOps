@@ -27,6 +27,8 @@ Param(
   [string]$dockerEntrypoint = "",
   [Parameter(Mandatory=$false)]
   [boolean]$showModifiedFiles = $true,
+  [Parameter(Mandatory=$true)]
+  [boolean]$operationDirectory,
   [Parameter(Mandatory=$false)]
   [string]$publicServiceType = "ClusterIP"
   
@@ -36,6 +38,26 @@ Param(
 #mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim
 
 "#########################  PS Script begin with artifact tagging based on branch name. #########################"
+
+if ( $operationDirectory -eq '')
+{
+   $operationDirectory = 'PipelineScripts/k8s/'
+}
+ "####################### make sure the path to  new Dockerfile does exist ######"
+ if ($operationDirectory.LastIndexOf('\') -ne -1)
+ {
+    New-Item -ItemType Directory -Path $operationDirectory -Force
+ }
+
+ if ($yamlDirectory.operationDirectory('/') -ne -1)
+ {
+    New-Item -ItemType Directory -Path $operationDirectory -Force
+ }
+ "####################### [END OF :] make sure the path to  new Dockerfile does exist ######"
+
+
+
+
 
 if ($dockerEntrypoint -eq "" )
 {
@@ -176,31 +198,32 @@ $serviceUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V
 $dockerUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/Dockerfile?' + (new-guid).ToString()
 
 
-$namespaceFile='PipelineScripts/k8s/namespace-v1.yaml'
-$deploy='PipelineScripts/k8s/deployment-v1.yaml'
-$service='PipelineScripts/k8s/service-v1.yaml'
+$namespaceFile= $operationDirectory + 'namespace-v1.yaml'
+$deploy=        $operationDirectory + 'deployment-v1.yaml'
+$service=       $operationDirectory + 'service-v1.yaml'
 
 
+$tempDockerPath =  $operationDirectory + 'Dockerfile'
 
 Invoke-WebRequest $namespaceUri  -OutFile $namespaceFile
 Invoke-WebRequest $deployUri  -OutFile $deploy
 Invoke-WebRequest $serviceUri  -OutFile $service
-Invoke-WebRequest $dockerUri  -OutFile 'PipelineScripts/k8s/Dockerfile'
+Invoke-WebRequest $dockerUri  -OutFile  $tempDockerPath 
 
 
-$deploy='PipelineScripts/k8s/deployment-v1.yaml'
-$service='PipelineScripts/k8s/service-v1.yaml'
+$deploy=  $operationDirectory + 'deployment-v1.yaml'
+$service=  $operationDirectory + 'service-v1.yaml'
 
 " #### Copy yaml files"
-Copy-Item $namespaceFile -Destination 'PipelineScripts/k8s/step0.yaml'
-Copy-Item $deploy        -Destination 'PipelineScripts/k8s/step1.yaml'
-Copy-Item $service       -Destination 'PipelineScripts/k8s/step2.yaml'
-Copy-Item $service       -Destination 'PipelineScripts/k8s/step3.yaml'
-Copy-Item $deploy        -Destination 'PipelineScripts/k8s/step4.yaml'
-Copy-Item $service       -Destination 'PipelineScripts/k8s/step5.yaml'
-Copy-Item $service       -Destination 'PipelineScripts/k8s/step6.yaml'
-Copy-Item $service       -Destination 'PipelineScripts/k8s/step7.yaml'
-Copy-Item $deploy -Destination 'PipelineScripts/k8s/step8.yaml'
+Copy-Item $namespaceFile -Destination $operationDirectory'step0.yaml'
+Copy-Item $deploy        -Destination $operationDirectory'step1.yaml'
+Copy-Item $service       -Destination $operationDirectory'step2.yaml'
+Copy-Item $service       -Destination $operationDirectory'step3.yaml'
+Copy-Item $deploy        -Destination $operationDirectory'step4.yaml'
+Copy-Item $service       -Destination $operationDirectory'step5.yaml'
+Copy-Item $service       -Destination $operationDirectory'step6.yaml'
+Copy-Item $service       -Destination $operationDirectory'step7.yaml'
+Copy-Item $deploy        -Destination $operationDirectory'step8.yaml'
 ####
 
  
@@ -265,7 +288,7 @@ for ($i=0; $i -le 8; $i++)
     }
 
 
-    $fullPathYaml = 'PipelineScripts/k8s/step' + $i+ '.yaml'
+    $fullPathYaml = $operationDirectory + 'step' + $i+ '.yaml'
 
     foreach ($key in $hashTable.GetEnumerator()) {
         ### "step$($i)  replace $($key.Name) => $($key.Value)  "+ $BlueGreenDeploymentSlots[$i] 
@@ -317,9 +340,15 @@ if ( $dockerReplace -eq $false)
 else
 {
  "####################### make sure the path to  new Dockerfile does exist ######"
- if ($dockerPath.$s.LastIndexOf('\') -ne -1)
+ if ($dockerPath.LastIndexOf('\') -ne -1)
  {
     $createFolder4Dockerfile = $dockerPath.Substring(0 , $dockerPath.LastIndexOf('\'))
+    New-Item -ItemType Directory -Path $createFolder4Dockerfile -Force
+ }
+
+ if ($dockerPath.LastIndexOf('/') -ne -1)
+ {
+    $createFolder4Dockerfile = $dockerPath.Substring(0 , $dockerPath.LastIndexOf('/'))
     New-Item -ItemType Directory -Path $createFolder4Dockerfile -Force
  }
  
@@ -329,7 +358,7 @@ else
  " ####################### replace the docker file to $dockerPath #############" 
  
  
-  Copy-Item 'PipelineScripts/k8s/Dockerfile' -Destination $dockerPath  -Force
+  Copy-Item $tempDockerPath  -Destination $dockerPath  -Force
   
   $hashTableDocker = @{
     '#{entrypoint}#'  = $dockerEntrypoint
