@@ -198,21 +198,19 @@ $serviceUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V
 $dockerUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/Dockerfile?' + (new-guid).ToString()
 
 
-$namespaceFile= $operationDirectory + 'namespace-v1.yaml'
-$deploy=        $operationDirectory + 'deployment-v1.yaml'
-$service=       $operationDirectory + 'service-v1.yaml'
+$namespaceFile= $operationDirectory + 'template-namespace-v1.yaml'
+$deploy=        $operationDirectory + 'template-deployment-v1.yaml'
+$service=       $operationDirectory + 'template-service-v1.yaml'
 
 
 $tempDockerPath =  $operationDirectory + 'Dockerfile'
 
-Invoke-WebRequest $namespaceUri  -OutFile $namespaceFile
-Invoke-WebRequest $deployUri  -OutFile $deploy
-Invoke-WebRequest $serviceUri  -OutFile $service
-Invoke-WebRequest $dockerUri  -OutFile  $tempDockerPath 
+Invoke-WebRequest $namespaceUri -OutFile $namespaceFile
+Invoke-WebRequest $deployUri    -OutFile $deploy
+Invoke-WebRequest $serviceUri   -OutFile $service
+Invoke-WebRequest $dockerUri    -OutFile  $tempDockerPath 
 
 
-$deploy=  $operationDirectory + 'deployment-v1.yaml'
-$service=  $operationDirectory + 'service-v1.yaml'
 
 " #### Copy yaml files"
 Copy-Item $namespaceFile -Destination $operationDirectory'step0.yaml'
