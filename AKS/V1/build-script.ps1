@@ -42,12 +42,12 @@ if ( $operationDirectory -eq '')
    $operationDirectory = 'PipelineScripts/k8s/'
 }
  "####################### make sure the path to  new Dockerfile does exist ######"
- if ($operationDirectory.LastIndexOf('\') -ne -1)
+ if ($operationDirectory.lastIndexOf('\') -ne -1)
  {
     New-Item -ItemType Directory -Path $operationDirectory -Force
  }
 
- if ($yamlDirectory.operationDirectory('/') -ne -1)
+ if ($operationDirectory.lastIndexOf('/') -ne -1)
  {
     New-Item -ItemType Directory -Path $operationDirectory -Force
  }
