@@ -28,8 +28,9 @@ Param(
   [Parameter(Mandatory=$true)]
   [string]$operationDirectory,
   [Parameter(Mandatory=$false)]
-  [string]$publicServiceType = "ClusterIP"
-  
+  [string]$publicServiceType = "ClusterIP",
+  [Parameter(Mandatory=$false)]
+  [boolean]$addSSL = $false
 )
 # example of .netcore images
 #microsoft/dotnet:2.1-aspnetcore-runtime
@@ -374,6 +375,10 @@ else
     '#{dockerImage}#' = $dockerBase 
   }
   
+  if ( $addSSL -eq $true)
+  {
+    $hashTableDocker.Add('ENV ASPNETCORE_URLS="http://+80"','ENV ASPNETCORE_URLS="https://+443;http://+80"')
+  }
 
   foreach ($key in $hashTableDocker.GetEnumerator()) {
     "Docker keyName  = " + $key.Name 
