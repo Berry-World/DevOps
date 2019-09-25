@@ -379,7 +379,7 @@ else
   {
    # $hashTableDocker.Add('http://+80','https://+443;http://+80')
     $hashTableDocker.Add('#ENV ASPNETCORE_HTTPS_PORT=443','ENV ASPNETCORE_HTTPS_PORT=443')
-     $hashTableDocker.Add('#{ASPNETCORE_URLS}#','ENV ASPNETCORE_URLS=\"https://+443;http://+80\"')
+     $hashTableDocker.Add('#{ASPNETCORE_URLS}#','ENV ASPNETCORE_URLS="https://+443;http://+80"')
     #{ASPNETCORE_URLS}#
     
   }
