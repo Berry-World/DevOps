@@ -378,6 +378,7 @@ else
   if ( $addSSL -eq $true)
   {
     $hashTableDocker.Add('ENV ASPNETCORE_URLS="http://+80"','ENV ASPNETCORE_URLS="https://+443;http://+80"')
+    $hashTableDocker.Add('#ENV ASPNETCORE_HTTPS_PORT=443','ENV ASPNETCORE_HTTPS_PORT=443')
   }
 
   foreach ($key in $hashTableDocker.GetEnumerator()) {
