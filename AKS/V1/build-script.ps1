@@ -32,14 +32,13 @@ Param(
   [Parameter(Mandatory=$false)]
   [boolean]$addSSL = $false,
   [Parameter(Mandatory=$false)]
-  [string]$memoryLimitesResource = "4096M",
+  [string]$memoryLimits = "4096M",
   [Parameter(Mandatory=$false)]
-  [string]$memoryRequestsResource = "100M",
+  [string]$memoryRequest = "100M",
   [Parameter(Mandatory=$false)]
-  [string]$cpuLimitesResource = "1",
+  [string]$cpuLimits = "1",
   [Parameter(Mandatory=$false)]
-  [string]$cpuRequestsResource = ".001",  
-  
+  [string]$cpuRequest = ".001"
 )
 # example of .netcore images
 #microsoft/dotnet:2.1-aspnetcore-runtime
@@ -296,6 +295,10 @@ for ($i=0; $i -le 8; $i++)
         '#{minReplicas}#'  = $minReplicas
         '#{maxReplicas}#'  = $maxReplicas
         '#{serviceType}#'  = $serviceType[$i]
+        '#{memoryLimits}#' = $memoryLimits
+        '#{memoryRequest}#'= $memoryRequests
+        '#{cpuLimits}#'    = $cpuLimits
+        '#{cpuRequest}#'   = $cpuRequest
     }
 
 
