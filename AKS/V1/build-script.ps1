@@ -296,7 +296,7 @@ for ($i=0; $i -le 8; $i++)
         '#{maxReplicas}#'  = $maxReplicas
         '#{serviceType}#'  = $serviceType[$i]
         '#{memoryLimits}#' = $memoryLimits
-        '#{memoryRequest}#'= $memoryRequests
+        '#{memoryRequest}#'= $memoryRequest
         '#{cpuLimits}#'    = $cpuLimits
         '#{cpuRequest}#'   = $cpuRequest
     }
