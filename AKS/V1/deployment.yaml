@@ -36,17 +36,17 @@ spec:
         ports:   
         - containerPort: 80
         - containerPort: 443
- #       readinessProbe:
- #         httpGet:
- #            path: /#{warm_up_path}#
- #            port: 80
- #         initialDelaySeconds: 5
- #         periodSeconds: 5
- #         successThreshold: 1
+        readinessProbe:
+          httpGet:
+             path: /#{warm_up_path}#
+             port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
         resources:
           limits:
             cpu: 1
-            memory: 1024M
+            memory: 4096M
           requests:
             cpu: .001
             memory: 100M
