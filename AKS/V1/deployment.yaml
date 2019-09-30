@@ -45,11 +45,11 @@ spec:
           successThreshold: 1
         resources:
           limits:
-            cpu: 1
-            memory: 4096M
+            cpu: #{cpuLimits}#
+            memory: #{memoryLimits}#
           requests:
-            cpu: .001
-            memory: 100M
+            cpu: #{cpuRequest}#
+            memory: #{memoryRequest}#
 --- 
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
