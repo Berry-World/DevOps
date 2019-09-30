@@ -30,7 +30,16 @@ Param(
   [Parameter(Mandatory=$false)]
   [string]$publicServiceType = "ClusterIP",
   [Parameter(Mandatory=$false)]
-  [boolean]$addSSL = $false
+  [boolean]$addSSL = $false,
+  [Parameter(Mandatory=$false)]
+  [string]$memoryLimitesResource = "4096M",
+  [Parameter(Mandatory=$false)]
+  [string]$memoryRequestsResource = "100M",
+  [Parameter(Mandatory=$false)]
+  [string]$cpuLimitesResource = "1",
+  [Parameter(Mandatory=$false)]
+  [string]$cpuRequestsResource = ".001",  
+  
 )
 # example of .netcore images
 #microsoft/dotnet:2.1-aspnetcore-runtime
