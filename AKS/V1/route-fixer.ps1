@@ -15,6 +15,8 @@ if ( $routeChanging -eq $true){
   Get-ChildItem -Path $routeFilePath -Filter $routeFileFilter -Recurse  | ForEach-Object {
 
     $fullFileName =  $_.FullName
+    
+    "Full file name of the  Controller: " + $_.FullName 
 
     foreach ($key in $routeReplacingHashTable.getenumerator()) {
 
