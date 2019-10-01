@@ -445,6 +445,6 @@ if ($routeChanging  -eq $true) {
   "## New hashtable ###"
   $routeReplacingHashTable 
 
-  & ($routeFixerPath) -routeChanging $routeChanging -routeFilePath $routeFilePath -routeFilefilter $routeFilefilter -routeReplacingHashTable $routeReplacingHashTable   
+  # & ($routeFixerPath) -routeChanging $routeChanging -routeFilePath $routeFilePath -routeFilefilter $routeFilefilter -routeReplacingHashTable $routeReplacingHashTable   
 }
 
