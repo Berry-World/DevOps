@@ -439,7 +439,7 @@ else
 if ($routeChanging  -eq $true) {
   
   $oldRouteValue = '[Route("api/[controller]")]'
-  $newRouteValue = $oldRouteValue + '`r`n[Route("/' + $app + "/" + $namespace + '/api/[controller]")]'
+  $newRouteValue = $oldRouteValue + '`r`n[Route("/' + $namespace + $app + "/" + '/api/[controller]")]'
   $routeReplacingHashTable =  @{  $oldRouteValue = $newRouteValue  }
 
   "## New hashtable ###"
