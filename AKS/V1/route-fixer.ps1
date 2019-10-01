@@ -10,7 +10,18 @@ Param(
   
 )
 
+"######### Start of Rout Fixer #########"
+
+
 if ( $routeChanging -eq $true){
+  "Parameters :"
+  "$routeChanging  :  " + $routeChanging
+  "$routeFilePath  :  " + $routeFilePath
+  "$routeFileFilter  :  " + $routeFileFilter
+  "$routeReplacingHashTable  :  " + $routeReplacingHashTable
+   
+
+"######### Rout fixing files : #########"
 
   Get-ChildItem -Path $routeFilePath -Filter $routeFileFilter -Recurse  | ForEach-Object {
 
