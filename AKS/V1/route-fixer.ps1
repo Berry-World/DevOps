@@ -15,12 +15,12 @@ Param(
 
 if ( $routeChanging -eq $true){
   "Parameters :"
-  "$routeChanging  :  " + $routeChanging
-  "$routeFilePath  :  " + $routeFilePath
-  "$routeFileFilter  :  " + $routeFileFilter
-  "$routeReplacingHashTable  :  " + $routeReplacingHashTable
+  "routeChanging  :  " + $routeChanging
+  "routeFilePath  :  " + $routeFilePath
+  "routeFileFilter  :  " + $routeFileFilter
+  "routeReplacingHashTable  :  " + $routeReplacingHashTable
    
-
+""
 "######### Rout fixing files : #########"
 
   Get-ChildItem -Path $routeFilePath -Filter $routeFileFilter -Recurse  | ForEach-Object {
@@ -34,6 +34,7 @@ if ( $routeChanging -eq $true){
       $oldvalue = $key.name
       $newvalue = $key.value
 
+      (get-content $fullFileName) -replace [regex]::escape($oldvalue)  , $newvalue   # | set-content $fullFileName
       (get-content $fullFileName) -replace [regex]::escape($oldvalue)  , $newvalue    | set-content $fullFileName
     } 
   }
