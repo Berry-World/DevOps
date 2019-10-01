@@ -34,7 +34,7 @@ if ( $routeChanging -eq $true){
       $oldvalue = $key.name
       $newvalue = $key.value
 
-      (get-content $fullFileName) -replace [regex]::escape($oldvalue)  , [regex]::escape($newvalue)      # | set-content $fullFileName
+      (get-content $fullFileName) -replace [regex]::escape($oldvalue)  , $newvalue    | set-content $fullFileName
     } 
   }
 }
