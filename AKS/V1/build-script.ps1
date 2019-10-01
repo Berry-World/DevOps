@@ -437,9 +437,10 @@ else
 
 
 if ($routeChanging  -eq $true) {
-      
-  $newRouteValue = '[Route("' + $app + $namespace + '/api'
-  $routeReplacingHashTable =  @{ '\[Route\(\"api' = '[Route("tst1/finance/api'  }
+  
+  $oldRouteValue = '[Route("api/[controller]")]'
+  $newRouteValue = $oldRouteValue + '`r`n[Route("/' + $app + "/" + $namespace + '/api/[controller]")]'
+  $routeReplacingHashTable =  @{  $oldRouteValue = $newRouteValue  }
 
   "## New hashtable ###"
   $routeReplacingHashTable 
