@@ -42,9 +42,9 @@ Param(
   [Parameter(Mandatory=$false)]
   [boolean]$routeChanging  = $false,
   [Parameter(Mandatory=$false)]
-  [string]$routrFilePath= "./", 
+  [string]$routeFilePath= "./", 
   [Parameter(Mandatory=$false)]
-  [string]$RoutFilefilter= "*.cs", 
+  [string]$routeFilefilter= "*.cs", 
   [Parameter(Mandatory=$false)]
   [hashtable]$routeReplacingHashTable =  @{ '\[Route\(\"api' = '[Route("tst1/finance/api'  }
   
@@ -444,6 +444,6 @@ if ($routeChanging  -eq $true) {
   "## New hashtable ###"
   $routeReplacingHashTable 
 
-  & ($routeFixerPath) -routeChanging $routeChanging -routrFilePath $routrFilePath -RoutFilefilter $RoutFilefilter -routeReplacingHashTable $routeReplacingHashTable   
+  & ($routeFixerPath) -routeChanging $routeChanging -routeFilePath $routeFilePath -routeFilefilter $routeFilefilter -routeReplacingHashTable $routeReplacingHashTable   
 }
 
