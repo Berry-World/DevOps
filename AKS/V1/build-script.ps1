@@ -441,6 +441,9 @@ if ($routeChanging  -eq $true) {
   $newRouteValue = '[Route("' + $app + $namespace + '/api'
   $routeReplacingHashTable =  @{ '\[Route\(\"api' = '[Route("tst1/finance/api'  }
 
-  & ($routeFixerPath) -routeChanging $routeChanging -routrFilePath $routrFilePath -RoutFilefilter $RoutFilefilter -routeReplacingHashTable $routeReplacingHashTable  
+  "## New hashtable ###"
+  $routeReplacingHashTable 
+
+  & ($routeFixerPath) -routeChanging $routeChanging -routrFilePath $routrFilePath -RoutFilefilter $RoutFilefilter -routeReplacingHashTable $routeReplacingHashTable   
 }
 
