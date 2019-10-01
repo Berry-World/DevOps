@@ -38,7 +38,16 @@ Param(
   [Parameter(Mandatory=$false)]
   [string]$cpuLimits = "1",
   [Parameter(Mandatory=$false)]
-  [string]$cpuRequest = ".001"
+  [string]$cpuRequest = ".001",
+  [Parameter(Mandatory=$false)]
+  [boolean]$routeChanging  = $false,
+  [Parameter(Mandatory=$false)]
+  [string]$routrFilePath= "./", 
+  [Parameter(Mandatory=$false)]
+  [string]$RoutFilefilter= "*.cs", 
+  [Parameter(Mandatory=$false)]
+  [hashtable]$routeReplacingHashTable =  @{ '\[Route\(\"api' = '[Route("tst1/finance/api'  }
+  
 )
 # example of .netcore images
 #microsoft/dotnet:2.1-aspnetcore-runtime
@@ -203,19 +212,21 @@ $namespaceUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS
 $deployUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/deployment.yaml?'+ (new-guid).ToString()
 $serviceUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/service.yaml?'+ (new-guid).ToString()
 $dockerUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/Dockerfile?' + (new-guid).ToString()
+$routefixerUri = 'https://raw.githubusercontent.com/Berry-World/DevOps/master/AKS/V1/route-fixer.ps1?' + (new-guid).ToString()
 
 
-$namespaceFile= $operationDirectory + 'template-namespace-v1.yaml'
-$deploy=        $operationDirectory + 'template-deployment-v1.yaml'
-$service=       $operationDirectory + 'template-service-v1.yaml'
+$namespaceFile   = $operationDirectory + 'template-namespace-v1.yaml'
+$deploy          = $operationDirectory + 'template-deployment-v1.yaml'
+$service         = $operationDirectory + 'template-service-v1.yaml'
+$tempDockerPath  = $operationDirectory + 'Dockerfile'
+$routeFixerPath  = $operationDirectory + 'route-fixer.ps1'
 
 
-$tempDockerPath =  $operationDirectory + 'Dockerfile'
-
-Invoke-WebRequest $namespaceUri -OutFile $namespaceFile
-Invoke-WebRequest $deployUri    -OutFile $deploy
-Invoke-WebRequest $serviceUri   -OutFile $service
-Invoke-WebRequest $dockerUri    -OutFile  $tempDockerPath 
+Invoke-WebRequest $namespaceUri   -OutFile $namespaceFile
+Invoke-WebRequest $deployUri      -OutFile $deploy
+Invoke-WebRequest $serviceUri     -OutFile $service
+Invoke-WebRequest $dockerUri      -OutFile $tempDockerPath 
+Invoke-WebRequest $routefixerUri  -OutFile $routeFixerPath
 
 
 
