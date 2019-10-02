@@ -396,6 +396,7 @@ else
     '#{entrypoint}#'  = $dockerEntrypoint
     '#{environment}#' = $aspnetEnvName 
     '#{dockerImage}#' = $dockerBase 
+    '#{BWG_BASE_URL}#' = $namespace + "/" + $app + "/" 
   }
   
   if ( $addSSL -eq $true)
