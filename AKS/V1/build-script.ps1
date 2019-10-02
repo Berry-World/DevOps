@@ -396,8 +396,8 @@ else
     '#{entrypoint}#'  = $dockerEntrypoint
     '#{environment}#' = $aspnetEnvName 
     '#{dockerImage}#' = $dockerBase 
-    '#{BWG_BASE_URL}#' = 'ENV BWG_BASE_URL="$($namespace)/$($app)/"' 
-  }
+    '#{BWG_BASE_URL}#' = -join('ENV BWG_BASE_URL="' ,  $namespace , '/' , $app , '"') 
+    }
   
   if ( $addSSL -eq $true)
   {
@@ -409,7 +409,7 @@ else
   {
   "########### SET ASPNETCORE_URLS Without SSL ############"
   
-   $urls='ENV ASPNETCORE_URLS="http://+80;http://+80/$($namespace)/$($app)"
+   $urls=  -join( 'ENV ASPNETCORE_URLS="http://+80;http://+80/' , $namespace , '/' , $app , '"')
    " ###  URLS =$($urls)"  
    
     $hashTableDocker.Add('#{ASPNETCORE_HTTPS_PORT}#','')
@@ -446,7 +446,7 @@ else
 if ($routeChanging  -eq $true) {
   
   $oldRouteValue = '[Route("api/[controller]")]'
-  $newRouteValue = '[Route("api/[controller]")]  [Route("$($namespace)/$($app)/api/[controller]")]'
+  $newRouteValue = -join( '[Route("api/[controller]")]  [Route("'  , $namespace , '/'  , $($app) , '/api/[controller]")]'
   $routeReplacingHashTable =  @{  $oldRouteValue = $newRouteValue  }
 
   "## New hashtable ###"
