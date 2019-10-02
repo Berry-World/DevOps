@@ -406,8 +406,10 @@ else
   }
   else
   {
+   $urls='ENV ASPNETCORE_URLS="http://+80;http://+80/' + + $namespace + "/" + $app + '"' 
+   
     $hashTableDocker.Add('#{ASPNETCORE_HTTPS_PORT}#','')
-    $hashTableDocker.Add('#{ASPNETCORE_URLS}#','ENV ASPNETCORE_URLS="http://+80"')
+    $hashTableDocker.Add('#{ASPNETCORE_URLS}#',$urls)
   }
 
   foreach ($key in $hashTableDocker.GetEnumerator()) {
