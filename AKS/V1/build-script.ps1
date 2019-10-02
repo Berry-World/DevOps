@@ -396,7 +396,7 @@ else
     '#{entrypoint}#'  = $dockerEntrypoint
     '#{environment}#' = $aspnetEnvName 
     '#{dockerImage}#' = $dockerBase 
-    '#{BWG_BASE_URL}#' = -join('ENV BWG_BASE_URL="' ,  $namespace , '/' , $app , '"') 
+    '#{BWG_BASE_URL}#' = -join('ENV BWG_BASE_URL="' ,  $namespace , '/' , $app , '/"') 
     }
   
   if ( $addSSL -eq $true)
@@ -409,7 +409,8 @@ else
   {
   "########### SET ASPNETCORE_URLS Without SSL ############"
   
-   $urls=  -join( 'ENV ASPNETCORE_URLS="http://+80;http://+80/' , $namespace , '/' , $app , '"')
+   #$urls=  -join( 'ENV ASPNETCORE_URLS="http://+80;http://+80/' , $namespace , '/' , $app , '"')
+   $urls=  -join( 'ENV ASPNETCORE_URLS="http://+80/' , $namespace , '/' , $app , '"')
    " ###  URLS =$($urls)"  
    
     $hashTableDocker.Add('#{ASPNETCORE_HTTPS_PORT}#','')
