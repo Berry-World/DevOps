@@ -396,7 +396,7 @@ else
     '#{entrypoint}#'  = $dockerEntrypoint
     '#{environment}#' = $aspnetEnvName 
     '#{dockerImage}#' = $dockerBase 
-    '#{BWG_BASE_URL}#' = $namespace + "/" + $app + "/" 
+    '#{BWG_BASE_URL}#' = 'ENV ASPNETCORE_URLS="' + $namespace + "/" + $app + '/"' 
   }
   
   if ( $addSSL -eq $true)
