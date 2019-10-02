@@ -401,12 +401,16 @@ else
   
   if ( $addSSL -eq $true)
   {
+  "########### SET ASPNETCORE_URLS with SSL ############"
     $hashTableDocker.Add('#{ASPNETCORE_HTTPS_PORT}#','ENV ASPNETCORE_HTTPS_PORT=443')
     $hashTableDocker.Add('#{ASPNETCORE_URLS}#','ENV ASPNETCORE_URLS="https://+443;http://+80"')
   }
   else
   {
+  "########### SET ASPNETCORE_URLS Without SSL ############"
+  
    $urls='ENV ASPNETCORE_URLS="http://+80;http://+80/$($namespace)/$($app)"
+   " ###  URLS =$($urls)"  
    
     $hashTableDocker.Add('#{ASPNETCORE_HTTPS_PORT}#','')
     $hashTableDocker.Add('#{ASPNETCORE_URLS}#',$urls)
