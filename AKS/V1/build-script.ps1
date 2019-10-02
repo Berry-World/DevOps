@@ -410,8 +410,8 @@ else
   "########### SET ASPNETCORE_URLS Without SSL ############"
   
    #$urls=  -join( 'ENV ASPNETCORE_URLS="http://+80;http://+80/' , $namespace , '/' , $app , '"')
-   #$urls=  -join( 'ENV ASPNETCORE_URLS="http://+80/' , $namespace , '/' , $app , '"')
-   $urls=  -join( 'ENV ASPNETCORE_URLS="http://+80"')
+   $urls=  -join( 'ENV ASPNETCORE_URLS="http://+80/' , $namespace , '/' , $app , '"')
+   #$urls=  -join( 'ENV ASPNETCORE_URLS="http://+80"')
    
    " ###  URLS =$($urls)"  
    
