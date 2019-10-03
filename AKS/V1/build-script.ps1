@@ -396,7 +396,7 @@ else
     '#{entrypoint}#'  = $dockerEntrypoint
     '#{environment}#' = $aspnetEnvName 
     '#{dockerImage}#' = $dockerBase 
-    '#{BWG_SWAGGER_BASE_URL}#' = -join('ENV BWG_SWAGGER_BASE_URL="' ,  $namespace , '/' , $app , '/"') 
+    '#{BWG_SWAGGER_BASE_URL}#' = -join('ENV BWG_SWAGGER_BASE_URL=' ,  $namespace , '/' , $app , '/') 
     }
   
   if ( $addSSL -eq $true)
@@ -456,5 +456,9 @@ if ($routeChanging  -eq $true) {
   $routeReplacingHashTable 
 
   # & ($routeFixerPath) -routeChanging $routeChanging -routeFilePath $routeFilePath -routeFilefilter $routeFilefilter -routeReplacingHashTable $routeReplacingHashTable   
+  
+  Remove-Item $routeFixerPath -ErrorAction Ignore
+
+
 }
 
