@@ -107,6 +107,20 @@ If ($branchName -like "deploy/dev/*")
   $aspnetEnvName="Development"
   $namespace= $branchName  -replace "(deploy)\/(dev[a-z0-9]+)\/(.*)",'$2'
   #Write-Host $addTag"dev"
+  
+  if ($namespace -eq "dev2")
+  {
+    $aspnetEnvName="Development2"
+  }elseif ($namespace -eq "dev3")
+  {
+    $aspnetEnvName="Development3"
+  }elseif ($namespace -eq "dev4")
+  {
+    $aspnetEnvName="Development4"
+  }elseif ($namespace -eq "dev5")
+  {
+    $aspnetEnvName="Development5"
+  }
 }
 
 If ($branchName -like "aks-poc/dev*")
@@ -132,6 +146,20 @@ If ($branchName -like "deploy/tst/*")
   $namespace= $branchName  -replace "(deploy)\/(tst[a-z0-9]+)\/(.*)",'$2'
   #Write-Host $addTag"tst"
   #Write-Host $addTag+$namespace
+  
+  if ($namespace -eq "tst2")
+  {
+    $aspnetEnvName="Test2"
+  }elseif ($namespace -eq "tst3")
+  {
+    $aspnetEnvName="Test3"
+  }elseif ($namespace -eq "tst4")
+  {
+    $aspnetEnvName="Test4"
+  }elseif ($namespace -eq "tst5")
+  {
+    $aspnetEnvName="Test5"
+  }
 }
 
 If ($branchName -like "aks-poc/tst/*")
