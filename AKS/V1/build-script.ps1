@@ -48,9 +48,9 @@ Param(
   [Parameter(Mandatory=$false)]
   [hashtable]$routeReplacingHashTable =  @{ '\[Route\(\"api' = '[Route("tst1/finance/api'  },
   [Parameter(Mandatory=$false)]
-  [string]$osType= "linux" //, 
-  //[Parameter(Mandatory=$false)]
-  //[hashtable]$branchNameMap2EnvName=  @{ 'master'='Production'   'deploy/dev1/*'='Development'  'deploy/tst1/*'='Test'   'deploy/tst2/*'='Test2'    'deploy/tst3/*'='Test3'  'deploy/tst4/*'='Test4' 'deploy/tst5/*'='Test5'   },
+  [string]$osType= "linux" , 
+  [Parameter(Mandatory=$false)]
+  [hashtable]$branchNameMap2EnvName=  @{ 'master'='Production' ;  'deploy/dev1/*'='Development' ; 'deploy/tst1/*'='Test' ;  'deploy/tst2/*'='Test2'  ;  'deploy/tst3/*'='Test3' ; 'deploy/tst4/*'='Test4'; 'deploy/tst5/*'='Test5'   }
 )
 # example of .netcore images
 #microsoft/dotnet:2.1-aspnetcore-runtime
