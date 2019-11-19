@@ -96,6 +96,15 @@ If ($branchName -like "master")
 {
   $aspnetEnvName="Production"
   #Write-Host $addTag"prod"
+  $namespace="prd1"
+}
+
+
+If ($branchName -like "master-webapps")
+{
+  $aspnetEnvName="Production"
+  #Write-Host $addTag"prod"
+  $namespace="prd1"
 }
 
 
