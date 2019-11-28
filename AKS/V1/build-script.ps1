@@ -7,6 +7,8 @@ Param(
   [string]$id,  
   [Parameter(Mandatory=$false)]
   [string]$warm_up_path = '' ,
+  [Parameter(Mandatory=$false)]
+  [string]$warm_up_port = '80' ,
   [Parameter(Mandatory=$true)]
   [string]$dockerPath,
   [Parameter(Mandatory=$true)]
@@ -342,6 +344,7 @@ for ($i=0; $i -le 8; $i++)
         '#{tag}#'          = $id + '-' + $envTag
         '#{buidId}#'       = $id
         '#{warm_up_path}#' = $warm_up_path
+        '#{warm_up_port}#' = $warm_up_port
         '#{replica}#'      = $replica
         '#{minReplicas}#'  = $minReplicas
         '#{maxReplicas}#'  = $maxReplicas
