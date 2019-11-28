@@ -41,7 +41,7 @@ spec:
         readinessProbe:
           httpGet:
              path: /#{warm_up_path}#
-             port: 80
+             port: #{warm_up_port}#
           initialDelaySeconds: 30
           periodSeconds: 5
           successThreshold: 1
