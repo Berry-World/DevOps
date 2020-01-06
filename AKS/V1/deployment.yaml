@@ -34,7 +34,7 @@ spec:
          "beta.kubernetes.io/os":  #{osType}#
       containers:  
       - name: #{the_app}#-#{environment}#-#{slot}#
-        image: 'crwaprd1docker1.azurecr.io/#{image}#:#{tag}#'
+        image: '#{containerRegistery}#/#{image}#:#{tag}#'
         ports:   
         - containerPort: 80
         - containerPort: 443
