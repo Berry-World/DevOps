@@ -52,7 +52,10 @@ Param(
   [Parameter(Mandatory=$false)]
   [string]$osType= "linux" , 
   [Parameter(Mandatory=$false)]
-  [hashtable]$branchNameMap2EnvName=  @{ 'master'='Production' ;  'deploy/dev1/*'='Development' ; 'deploy/tst1/*'='Test' ;  'deploy/tst2/*'='Test2'  ;  'deploy/tst3/*'='Test3' ; 'deploy/tst4/*'='Test4'; 'deploy/tst5/*'='Test5'   }
+  [hashtable]$branchNameMap2EnvName=  @{ 'master'='Production' ;  'deploy/dev1/*'='Development' ; 'deploy/tst1/*'='Test' ;  'deploy/tst2/*'='Test2'  ;  'deploy/tst3/*'='Test3' ; 'deploy/tst4/*'='Test4'; 'deploy/tst5/*'='Test5'   } ,
+  [Parameter(Mandatory=$false)]
+  [string]$containerRegistery= "crwaprd1docker1.azurecr.io"
+
 )
 # example of .netcore images
 #microsoft/dotnet:2.1-aspnetcore-runtime
@@ -354,6 +357,7 @@ for ($i=0; $i -le 8; $i++)
         '#{cpuLimits}#'    = $cpuLimits
         '#{cpuRequest}#'   = $cpuRequest
         '#{osType}#'       = $osType
+        '#{containerRegistery}#' = $containerRegistery
 
     }
 
