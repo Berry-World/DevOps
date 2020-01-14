@@ -54,7 +54,13 @@ Param(
   [Parameter(Mandatory=$false)]
   [hashtable]$branchNameMap2EnvName=  @{ 'master'='Production' ;  'deploy/dev1/*'='Development' ; 'deploy/tst1/*'='Test' ;  'deploy/tst2/*'='Test2'  ;  'deploy/tst3/*'='Test3' ; 'deploy/tst4/*'='Test4'; 'deploy/tst5/*'='Test5'   } ,
   [Parameter(Mandatory=$false)]
-  [string]$containerRegistery= "crwaprd1docker1.azurecr.io"
+  [string]$containerRegistery= "crwaprd1docker1.azurecr.io",
+  [Parameter(Mandatory=$false)]
+  [boolean]$multiDevelopmentEnvName  = $false,
+  [Parameter(Mandatory=$false)]
+  [boolean]$multiTestEnvName  = $false,
+  [Parameter(Mandatory=$false)]
+  [boolean]$multiPocEnvName  = $false
 
 )
 # example of .netcore images
@@ -125,18 +131,21 @@ If ($branchName -like "deploy/dev/*")
   $namespace= $branchName  -replace "(deploy)\/(dev[a-z0-9]+)\/(.*)",'$2'
   #Write-Host $addTag"dev"
   
-  if ($namespace -eq "dev2")
+  if( $multiDevelopmentEnvName  -eq $true)
   {
-    $aspnetEnvName="Development2"
-  }elseif ($namespace -eq "dev3")
-  {
-    $aspnetEnvName="Development3"
-  }elseif ($namespace -eq "dev4")
-  {
-    $aspnetEnvName="Development4"
-  }elseif ($namespace -eq "dev5")
-  {
-    $aspnetEnvName="Development5"
+    if ($namespace -eq "dev2")
+    {
+      $aspnetEnvName="Development2"
+    }elseif ($namespace -eq "dev3")
+    {
+      $aspnetEnvName="Development3"
+    }elseif ($namespace -eq "dev4")
+    {
+      $aspnetEnvName="Development4"
+    }elseif ($namespace -eq "dev5")
+    {
+      $aspnetEnvName="Development5"
+    }
   }
 }
 
@@ -164,18 +173,55 @@ If ($branchName -like "deploy/tst/*")
   #Write-Host $addTag"tst"
   #Write-Host $addTag+$namespace
   
-  if ($namespace -eq "tst2")
+  
+  if( $multiTestEnvName  -eq $true)
   {
-    $aspnetEnvName="Test2"
-  }elseif ($namespace -eq "tst3")
+    if ($namespace -eq "tst2")
+    {
+      $aspnetEnvName="Test2"
+    }elseif ($namespace -eq "tst3")
+    {
+      $aspnetEnvName="Test3"
+    }elseif ($namespace -eq "tst4")
+    {
+      $aspnetEnvName="Test4"
+    }elseif ($namespace -eq "tst5")
+    {
+      $aspnetEnvName="Test5"
+    }
+  }
+}
+
+If ($branchName -like "deploy/poc*/*")
+{
+  $aspnetEnvName="Poc"
+  $namespace= $branchName  -replace "(deploy)\/(poc[a-z0-9]+)\/(.*)",'$2'
+  #Write-Host $addTag"poc"
+  #Write-Host $addTag+$namespace
+  
+}elseIf ($branchName -like "deploy/poc*/*")
+{
+  $aspnetEnvName="Poc"
+  $namespace= $branchName  -replace "(deploy)\/(poc[a-z0-9]+)\/(.*)",'$2'
+  #Write-Host $addTag"poc"
+  #Write-Host $addTag+$namespace
+  
+  
+  if( $multiPocEnvName  -eq $true)
   {
-    $aspnetEnvName="Test3"
-  }elseif ($namespace -eq "tst4")
-  {
-    $aspnetEnvName="Test4"
-  }elseif ($namespace -eq "tst5")
-  {
-    $aspnetEnvName="Test5"
+    if ($namespace -eq "poc2")
+    {
+      $aspnetEnvName="Poc2"
+    }elseif ($namespace -eq "poc3")
+    {
+      $aspnetEnvName="Poc3"
+    }elseif ($namespace -eq "poc4")
+    {
+      $aspnetEnvName="Poc4"
+    }elseif ($namespace -eq "poc5")
+    {
+      $aspnetEnvName="Poc5"
+    }
   }
 }
 
