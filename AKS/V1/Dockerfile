@@ -10,4 +10,8 @@ ENV ASPNETCORE_ENVIRONMENT=#{environment}#
 #{ASPNETCORE_HTTPS_PORT}#
 #{BWG_SWAGGER_BASE_URL}#
 
+
+#placeholder
+
+
 ENTRYPOINT ["dotnet", "#{entrypoint}#"]
