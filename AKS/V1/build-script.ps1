@@ -486,12 +486,15 @@ else
  "##################################Removing Temp Dockerfile from : "   +  $tempDockerPath 
  Remove-Item   $tempDockerPath 
   
+  $BWG_SWAGGER_BASE_URL = -join('ENV BWG_SWAGGER_BASE_URL=' ,  $namespace , '/' , $app , '/') 
+  $BWG_SWAGGER_BASE_URL =  $BWG_SWAGGER_BASE_URL.Replace('prd1/','')
+   
   
   $hashTableDocker = @{
     '#{entrypoint}#'  = $dockerEntrypoint
     '#{environment}#' = $aspnetEnvName 
     '#{dockerImage}#' = $dockerBase 
-    '#{BWG_SWAGGER_BASE_URL}#' = -join('ENV BWG_SWAGGER_BASE_URL=' ,  $namespace , '/' , $app , '/') 
+    '#{BWG_SWAGGER_BASE_URL}#' = $BWG_SWAGGER_BASE_URL
     }
   
   if ( $addSSL -eq $true)
