@@ -38,9 +38,9 @@ Param(
   [Parameter(Mandatory=$false)]
   [string]$memoryRequest = "100M",
   [Parameter(Mandatory=$false)]
-  [string]$cpuLimits = "1",
+  [string]$cpuLimits = ".500",
   [Parameter(Mandatory=$false)]
-  [string]$cpuRequest = ".001",
+  [string]$cpuRequest = ".250",
   [Parameter(Mandatory=$false)]
   [boolean]$routeChanging  = $false,
   [Parameter(Mandatory=$false)]
