@@ -18,7 +18,7 @@ Param(
   [Parameter(Mandatory=$false)]
   [Int]$minReplicas = 1,
   [Parameter(Mandatory=$false)]
-  [Int]$maxReplicas = 10,
+  [Int]$maxReplicas = 7,
   [Parameter(Mandatory=$false)]
   [boolean]$dockerReplace = $false,
   [Parameter(Mandatory=$false)]
@@ -40,7 +40,7 @@ Param(
   [Parameter(Mandatory=$false)]
   [string]$cpuLimits = ".500",
   [Parameter(Mandatory=$false)]
-  [string]$cpuRequest = ".250",
+  [string]$cpuRequest = ".001",
   [Parameter(Mandatory=$false)]
   [boolean]$routeChanging  = $false,
   [Parameter(Mandatory=$false)]
