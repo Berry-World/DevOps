@@ -35,6 +35,7 @@ spec:
       containers:  
       - name: #{the_app}#-#{environment}#-#{slot}#
         image: '#{containerRegistery}#/#{image}#:#{tag}#'
+#cmr
         ports:   
         - containerPort: 80
         - containerPort: 443
