@@ -35,7 +35,9 @@ spec:
       containers:  
       - name: #{the_app}#-#{environment}#-#{slot}#
         image: '#{containerRegistery}#/#{image}#:#{tag}#'
-#cmr
+        envFrom:
+        - configMapRef:
+            name: default-config
         ports:   
         - containerPort: 80
         - containerPort: 443
