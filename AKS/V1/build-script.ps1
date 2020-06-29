@@ -60,12 +60,16 @@ Param(
   [Parameter(Mandatory=$false)]
   [boolean]$multiTestEnvName  = $false,
   [Parameter(Mandatory=$false)]
-  [boolean]$multiPocEnvName  = $false
-
+  [boolean]$multiPocEnvName  = $false,
+  [Parameter(Mandatory=$false)]
+  [boolean]$default_volume_volumeMount  = $false,
+  [Parameter(Mandatory=$false)]
+  [hashtable]$custom_volume_volumeMount  = $null
 )
 # example of .netcore images
 #microsoft/dotnet:2.1-aspnetcore-runtime
 #mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim
+
 
 "#########################  PS Script begin with artifact tagging based on branch name. #########################"
 
@@ -377,6 +381,30 @@ $serviceType = @{
     8='ClusterIP'
 }
 
+$volumeMounts = '#'
+$volumes = '#'
+
+if ( $default_volume_volumeMount -eq $true)
+{
+$volumeMounts = @"
+        volumeMounts:
+        - name: secrets-store-inline
+          mountPath: "/mnt/secrets-store"
+          readOnly: true
+"@
+
+$volumes = @"
+      volumes:
+      - name: secrets-store-inline
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: secret-provider-kv
+"@
+
+
+}
 
 
  $image =  $repo.ToLower()
@@ -404,6 +432,8 @@ for ($i=0; $i -le 8; $i++)
         '#{cpuRequest}#'   = $cpuRequest
         '#{osType}#'       = $osType
         '#{containerRegistery}#' = $containerRegistery
+        '#{volumeMounts}#' = $volumeMounts
+        '#{volumes}#'      = $volumes
 
     }
 
