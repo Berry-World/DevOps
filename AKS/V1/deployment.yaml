@@ -55,6 +55,8 @@ spec:
           requests:
             cpu: #{cpuRequest}#
             memory: #{memoryRequest}#
+#{volumeMounts}#
+#{volumes}#
 --- 
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
