@@ -10,7 +10,7 @@ metadata:
     deploymentSlot:  #{slot}#
     buildId: "#{buidId}#"
     dockerImageTag: #{tag}#
-#{aadpodidbinding_selector}#    
+#{aadpodidbinding_selector1}#    
 spec:  
   replicas: #{replica}#
   selector:
@@ -30,7 +30,7 @@ spec:
         deploymentSlot:  #{slot}#
         buildId: "#{buidId}#"
         dockerImageTag: #{tag}#
-#{aadpodidbinding_selector}# 
+#{aadpodidbinding_selector2}# 
     spec:  
       nodeSelector:
          "beta.kubernetes.io/os":  #{osType}#
