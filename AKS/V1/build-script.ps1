@@ -64,7 +64,11 @@ Param(
   [Parameter(Mandatory=$false)]
   [boolean]$default_volume_volumeMount  = $false,
   [Parameter(Mandatory=$false)]
-  [hashtable]$custom_volume_volumeMount  = $null
+  [hashtable]$custom_volume_volumeMount  = $null,
+  [Parameter(Mandatory=$false)]
+  [boolean]$use_aadpodidbinding  = $false,
+  [Parameter(Mandatory=$false)]
+  [string]$aadpodidbinding_selector  = $null
 )
 # example of .netcore images
 #microsoft/dotnet:2.1-aspnetcore-runtime
