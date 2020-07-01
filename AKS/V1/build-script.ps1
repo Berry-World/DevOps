@@ -406,9 +406,23 @@ $volumes = @"
           volumeAttributes:
             secretProviderClass: secret-provider-kv
 "@
-
-
 }
+
+
+$aadpodidbinding_selector1 = '#'
+$aadpodidbinding_selector2 = '#'
+
+if ( $use_aadpodidbinding -eq $true)
+{
+$aadpodidbinding_selector1 = @"
+    aadpodidbinding: $($aadpodidbinding_selector)
+"@
+
+$aadpodidbinding_selector2 = @"
+        aadpodidbinding: $($aadpodidbinding_selector)
+"@
+}
+
 
 
  $image =  $repo.ToLower()
@@ -438,7 +452,8 @@ for ($i=0; $i -le 8; $i++)
         '#{containerRegistery}#' = $containerRegistery
         '#{volumeMounts}#' = $volumeMounts
         '#{volumes}#'      = $volumes
-
+        '#{aadpodidbinding_selector1}#'      = $aadpodidbinding_selector1
+        '#{aadpodidbinding_selector2}#'      = $aadpodidbinding_selector2
     }
 
 
