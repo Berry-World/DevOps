@@ -43,13 +43,13 @@ spec:
         ports:   
         - containerPort: 80
         - containerPort: 443
-        readinessProbe:
-          httpGet:
-             path: /#{warm_up_path}#
-             port: #{warm_up_port}#
-          initialDelaySeconds: 30
-          periodSeconds: 5
-          successThreshold: 1
+        #readinessProbe:
+        #  httpGet:
+        #     path: /#{warm_up_path}#
+        #     port: #{warm_up_port}#
+        #  initialDelaySeconds: 30
+        #  periodSeconds: 5
+        #  successThreshold: 1
         resources:
           limits:
             cpu: #{cpuLimits}#
