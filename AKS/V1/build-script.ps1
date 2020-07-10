@@ -34,7 +34,7 @@ Param(
   [Parameter(Mandatory=$false)]
   [boolean]$addSSL = $false,
   [Parameter(Mandatory=$false)]
-  [string]$memoryLimits = "512M",
+  [string]$memoryLimits = "1024M",
   [Parameter(Mandatory=$false)]
   [string]$memoryRequest = "100M",
   [Parameter(Mandatory=$false)]
