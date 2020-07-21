@@ -68,7 +68,11 @@ Param(
   [Parameter(Mandatory=$false)]
   [boolean]$use_aadpodidbinding  = $false,
   [Parameter(Mandatory=$false)]
-  [string]$aadpodidbinding_selector  = $null
+  [string]$aadpodidbinding_selector  = $null,
+  [Parameter(Mandatory=$false)]
+  [string]$cpuAverageUtilization  = '80',
+  [Parameter(Mandatory=$false)]
+  [string]$memoryAverageValue  = '900Mi'
 )
 # example of .netcore images
 #microsoft/dotnet:2.1-aspnetcore-runtime
@@ -454,6 +458,8 @@ for ($i=0; $i -le 8; $i++)
         '#{volumes}#'      = $volumes
         '#{aadpodidbinding_selector1}#'      = $aadpodidbinding_selector1
         '#{aadpodidbinding_selector2}#'      = $aadpodidbinding_selector2
+        '#{cpuAverageUtilization}#'      = $cpuAverageUtilization
+        '#{memoryAverageValue}#'      = $memoryAverageValue
     }
 
 
