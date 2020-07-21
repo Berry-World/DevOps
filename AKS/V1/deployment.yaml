@@ -59,74 +59,37 @@ spec:
             memory: #{memoryRequest}#
 #{volumeMounts}#
 #{volumes}#
-#--- 
+--- 
 
-#apiVersion: autoscaling/v2beta2
-#kind: HorizontalPodAutoscaler
-#metadata:
-#  name: #{the_app}#-#{environment}#-#{slot}#
-#  namespace: #{namespace}#
-#  labels:
-#    shortName: #{the_app}#
-#    environment: #{environment}#
-#    app: #{the_app}#-#{environment}#-#{slot}#
-#    deploymentSlot:  #{slot}#
-#    buildId: "#{buidId}#"
-#    dockerImageTag: #{tag}#
-#spec:
-#  scaleTargetRef:
-#    apiVersion: apps/v1
-#    kind: Deployment
-#    name: #{the_app}#-#{environment}#-#{slot}#
-#  minReplicas: #{minReplicas}#
-#  maxReplicas: #{maxReplicas}#
-#  metrics:
-#  - type: Resource
-#    resource:
-#      name: cpu
-#      target:
-#        type: Utilization
-#        averageUtilization: 75
-
-
-#  - type: Pods
-#    pods:
-#      metric:
-#        name: packets-per-second
-#      target:
-#        type: AverageValue
-#        averageValue: 1k
-  # - type: Object
-  #   object:
-  #     metric:
-  #       name: requests-per-second
-  #     # describedObject:
-  #     #   apiVersion: networking.k8s.io/v1beta1
-  #     #   kind: Ingress
-  #     #   name: main-route
-  #     target:
-  #       kind: Value
-  #       value: 10k
-#status:
-#  observedGeneration: 1
-#  lastScaleTime: <some-time>
-#  currentReplicas: 1
-#  desiredReplicas: 1
-#  currentMetrics:
-#  - type: Resource
-#    resource:
-#      name: cpu
-#    current:
-#      averageUtilization: 0
-#      averageValue: 0
-#  - type: Object
-#    object:
-#      metric:
-#        name: requests-per-second
-#      describedObject:
-#        apiVersion: networking.k8s.io/v1beta1
-#        kind: Ingress
-#        name: main-route
-#      current:
-#        value: 10k
-
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+ name: #{the_app}#-#{environment}#-#{slot}#
+ namespace: #{namespace}#
+ labels:
+   shortName: #{the_app}#
+   environment: #{environment}#
+   app: #{the_app}#-#{environment}#-#{slot}#
+   deploymentSlot:  #{slot}#
+   buildId: "#{buidId}#"
+   dockerImageTag: #{tag}#
+spec:
+ scaleTargetRef:
+   apiVersion: apps/v1
+   kind: Deployment
+   name: #{the_app}#-#{environment}#-#{slot}#
+ minReplicas: #{minReplicas}#
+ maxReplicas: #{maxReplicas}#
+ metrics:
+ - type: Resource
+   resource:
+     name: cpu
+     target:
+       type: Utilization
+       averageUtilization: #{cpuAverageUtilization}#
+ - type: Resource
+   resource:
+     name: memory
+     target:
+       type: AverageValue
+       averageValue: #{memoryAverageValue}#
