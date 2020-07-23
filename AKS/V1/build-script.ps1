@@ -408,7 +408,7 @@ $volumes = @"
           driver: secrets-store.csi.k8s.io
           readOnly: true
           volumeAttributes:
-            secretProviderClass: secret-provider-kv
+            secretProviderClass: secret-provider-kv-$($namespace)
 "@
 }
 
