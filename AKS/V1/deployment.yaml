@@ -33,7 +33,7 @@ spec:
 #{aadpodidbinding_selector2}# 
     spec:  
       nodeSelector:
-         "beta.kubernetes.io/os":  #{osType}#
+         "kubernetes.io/os":  #{osType}#
       containers:  
       - name: #{the_app}#-#{environment}#-#{slot}#
         image: '#{containerRegistery}#/#{image}#:#{tag}#'
