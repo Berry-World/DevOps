@@ -33,7 +33,7 @@ spec:
 #{aadpodidbinding_selector2}# 
     spec:  
       nodeSelector:
-         "kubernetes.io/os":  #{osType}#
+         "beta.kubernetes.io/os":  #{osType}#
       containers:  
       - name: #{the_app}#-#{environment}#-#{slot}#
         image: '#{containerRegistery}#/#{image}#:#{tag}#'
@@ -61,7 +61,7 @@ spec:
 #{volumes}#
 --- 
 
-apiVersion: autoscaling/v2
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
  name: #{the_app}#-#{environment}#-#{slot}#
