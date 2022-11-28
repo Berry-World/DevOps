@@ -13,5 +13,7 @@ ENV ASPNETCORE_ENVIRONMENT=#{environment}#
 
 #placeholder
 
+RUN apt-get update
+RUN apt-get install -y libgdiplus
 
 ENTRYPOINT ["dotnet", "#{entrypoint}#"]
